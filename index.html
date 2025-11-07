@@ -1,334 +1,607 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Chaitanya — Modern 3D DevOps Portfolio</title>
-  <meta name="description" content="Modern, trendy DevOps portfolio with immersive 3D hero, smooth animations and vibrant UI." />
+  <head>
+    <title>Aman Patel- Let's Code & Deploy</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+	<link rel="icon" href="images/browser.png" type="image/x-icon">
 
-  <!-- three.js + gsap -->
-  <script src="https://unpkg.com/three@0.155.0/build/three.min.js" defer></script>
-  <script src="https://unpkg.com/three@0.155.0/examples/js/controls/OrbitControls.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.0/gsap.min.js" defer></script>
+    <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+    
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/aos.css">
 
-  <style>
-    /* ---------- Theme: Ultra-modern neon glass ---------- */
-    :root{
-      --bg:#05030a; --panel: rgba(255,255,255,0.03); --glass-border: rgba(255,255,255,0.06);
-      --accentA: #00f5a0; --accentB: #7b61ff; --accentC: #ff4d8d; --muted:#9aa4bd;
-      --card: rgba(255,255,255,0.02); --radius:18px; --glass: rgba(255,255,255,0.02);
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%;margin:0;background:radial-gradient(1200px 500px at 10% 10%, rgba(123,97,255,0.08), transparent), radial-gradient(900px 400px at 95% 80%, rgba(255,77,141,0.06), transparent), var(--bg);font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial;color:#eaf2ff}
+    <link rel="stylesheet" href="css/ionicons.min.css">
+    
+    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="css/icomoon.css">
+    <link rel="stylesheet" href="css/style.css">
 
-    /* layout */
-    .app{max-width:1200px;margin:28px auto;padding:28px}
-    header{display:flex;justify-content:space-between;align-items:center;gap:18px}
-    .brand{display:flex;align-items:center;gap:14px}
-    .logo{width:64px;height:64px;border-radius:14px;background:linear-gradient(135deg,var(--accentB),var(--accentA));display:flex;align-items:center;justify-content:center;font-weight:900;box-shadow:0 18px 60px rgba(123,97,255,0.12)}
-    .brand h1{margin:0;font-size:1.1rem}
-    nav a{color:var(--muted);text-decoration:none;margin-left:12px;padding:8px 10px;border-radius:12px}
-    nav a:hover{color:white;background:rgba(255,255,255,0.02)}
 
-    /* hero layout - full width immersive */
-    .hero-wrap{display:grid;grid-template-columns:1fr 520px;gap:28px;margin-top:22px;align-items:center}
-    .hero-card{padding:28px;border-radius:20px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border:1px solid var(--glass-border);backdrop-filter: blur(8px);box-shadow:0 20px 60px rgba(2,6,23,0.6)}
-    .kicker{display:inline-block;padding:6px 12px;border-radius:999px;background:linear-gradient(90deg,var(--accentA),var(--accentB));font-weight:700;color:#04121f}
-    h2{font-size:2.4rem;margin:12px 0}
-    p.lead{color:var(--muted);line-height:1.6}
-    .cta{display:flex;gap:12px;margin-top:18px}
-    .btn{padding:12px 16px;border-radius:12px;border:none;background:linear-gradient(90deg,var(--accentB),var(--accentA));color:#04121f;font-weight:700;cursor:pointer;box-shadow:0 14px 40px rgba(123,97,255,0.12)}
-    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted)}
+1
+<style>
 
-    /* 3D canvas container - bigger, curved */
-    #stage{height:560px;border-radius:24px;overflow:hidden;border:1px solid rgba(255,255,255,0.035);background:linear-gradient(180deg, rgba(11,8,20,0.8), rgba(8,6,15,0.6))}
+/*======================================
+//--//-->   ABOUT
+======================================*/
 
-    /* floating quick links */
-    .quick{display:flex;gap:8px;margin-top:14px}
-    .chip{padding:8px 10px;border-radius:12px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));font-weight:600;color:var(--muted);border:1px solid rgba(255,255,255,0.02)}
+.about-mf .box-shadow-full {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
 
-    /* projects grid modern cards */
-    .projects{margin-top:32px}
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .card{position:relative;border-radius:14px;padding:18px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03);overflow:hidden;cursor:pointer}
-    .card .accent{position:absolute;right:-60px;top:-40px;width:200px;height:200px;border-radius:60px;background:linear-gradient(135deg,var(--accentC),var(--accentA));opacity:0.08;transform:rotate(25deg)}
-    .card h4{margin:0}
-    .card p{margin-top:8px;color:var(--muted)}
+.about-mf .about-img {
+  margin-bottom: 2rem;
+}
 
-    /* feature strip */
-    .features{display:flex;gap:12px;margin-top:22px}
-    .feature{flex:1;padding:14px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border:1px solid rgba(255,255,255,0.02);}
+.about-mf .about-img img {
+  margin-left: 10px;
+}
 
-    /* timeline + skills */
-    .two-col{display:grid;grid-template-columns:1fr 360px;gap:18px;margin-top:24px}
-    .panel{padding:16px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border:1px solid rgba(255,255,255,0.02)}
 
-    /* contact */
-    .contact{margin-top:28px;padding:18px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border:1px solid rgba(255,255,255,0.02)}
-    input,textarea{width:100%;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit}
+.skill-mf .progress {
+  /* background-color: #cde1f8; */
+  margin: .5rem 0 1.2rem 0;
+  border-radius: 0;
+  height: .7rem;
+}
 
-    /* footer */
-    footer{margin-top:28px;text-align:center;color:var(--muted)}
+/* .skill-mf .progress{
+  height: .7rem;
+  background-color: #ffbd39;
+} */
 
-    /* responsive */
-    @media (max-width:1000px){.hero-wrap{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,1fr)}.two-col{grid-template-columns:1fr}.logo{width:52px;height:52px}}
-    @media (max-width:600px){.grid{grid-template-columns:1fr}nav{display:flex;flex-direction:column;gap:8px}}
+.progress-bar {
+            background-color: #ffbd39;
+			height: .7rem;
+            width: 0;
+            transition: width 5s ease;
+            }
 
-    /* cursor + micro interactions */
-    .cursor{position:fixed;pointer-events:none;z-index:9999;width:18px;height:18px;border-radius:50%;transform:translate(-50%,-50%);mix-blend-mode:screen;border:1px solid rgba(255,255,255,0.14)}
-    .glow{position:fixed;pointer-events:none;z-index:9998;width:200px;height:200px;border-radius:50%;transform:translate(-50%,-50%);filter:blur(40px);opacity:0.6}
 
-    /* entrance animation helpers */
-    .reveal{opacity:0;transform:translateY(12px);transition:all .6s cubic-bezier(.2,.9,.3,1)}
-    .reveal.show{opacity:1;transform:none}
-  </style>
+/* Animation styles */
+#typing-animation {
+  position: relative;
+  font-size: 30px;
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typing 3s steps(20, end) infinite;
+}
+
+#typing-animation:before {
+  content: "";
+  /* position: absolute; */
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background-color: #ccc;
+  animation: typing-cursor 0.5s ease-in-out infinite;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes typing-cursor {
+  from {
+    width: 5px;
+  }
+  to {
+    width: 0;
+  }
+}
+
+
+/* project image zoom effect */
+
+.zoom-effect {
+  overflow: hidden;
+  transition: transform 0.3s ease-out;
+}
+
+.zoom-effect:hover {
+  transform: scale(1.1);
+}
+
+
+</style>
+
+
+      <meta name="description" content="DevOps Portfolio — projects, skills, and contact.">
+    <link rel="stylesheet" href="css/optimized.css">
 </head>
-<body>
-  <div class="app">
-    <header>
-      <div class="brand">
-        <div class="logo">CS</div>
-        <div>
-          <h1>Chaitanya — DevOps</h1>
-          <div style="font-size:.85rem;color:var(--muted)">Cloud Architect • Platform Engineer • Automation</div>
-        </div>
-      </div>
-      <nav>
-        <a href="#projects">Projects</a>
-        <a href="#skills">Skills</a>
-        <a href="#contact">Contact</a>
-        <a class="btn" href="#hire">Hire me</a>
-      </nav>
-    </header>
+  <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+	  
+	  
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light site-navbar-target" id="ftco-navbar">
+	    <div class="container">
+	      <a class="navbar-brand" href="index.html"> Aman Patel </a>
+	      <button class="navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="oi oi-menu"></span> Menu
+	      </button>
 
-    <section class="hero-wrap">
-      <div class="hero-card reveal" id="intro">
-        <div class="kicker">Lead DevOps • Platform</div>
-        <h2>Building resilient cloud platforms and frictionless delivery pipelines</h2>
-        <p class="lead">I design and implement IaC, GitOps-driven delivery, and observability stacks. My craft: making deployments repeatable, secure, and delightfully boring — so engineers can ship faster.</p>
-        <div class="cta">
-          <button class="btn" id="ctaProjects">See projects</button>
-          <button class="btn ghost">Get résumé</button>
-        </div>
-        <div class="quick">
-          <div class="chip">Terraform</div>
-          <div class="chip">Kubernetes</div>
-          <div class="chip">ArgoCD</div>
-        </div>
-        <div class="features">
-          <div class="feature">
-            <strong>Automated Infra</strong>
-            <p style="color:var(--muted);margin-top:8px">Modular Terraform, blue/green and canary deployments.</p>
-          </div>
-          <div class="feature">
-            <strong>Platform Ops</strong>
-            <p style="color:var(--muted);margin-top:8px">Managed K8s, service mesh, multi-cluster strategy.</p>
-          </div>
-          <div class="feature">
-            <strong>Observability</strong>
-            <p style="color:var(--muted);margin-top:8px">Metrics, logging, tracing and SLO-based alerts.</p>
-          </div>
-        </div>
-      </div>
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav nav ml-auto">
+	          <li class="nav-item"><a href="#home-section" class="nav-link"><span>Home</span></a></li>
+	          <li class="nav-item"><a href="#about-section" class="nav-link"><span>About</span></a></li>
+	          <li class="nav-item"><a href="#resume-section" class="nav-link"><span>Resume</span></a></li>
+	          <li class="nav-item"><a href="#project-section" class="nav-link"><span>Projects</span></a></li>
+	          <li class="nav-item"><a href="#contact-section" class="nav-link"><span>Contact</span></a></li>
+		  <li class="nav-item"><a href="https://blog.amansdlc.com" target="_blank" class="nav-link"><span>Blog</span></a></li>
+	        </ul>
+	      </div>
+	    </div>
+	  </nav>
+	  <section id="home-section" class="hero">
+		  <div class="home-slider  owl-carousel">
+	       <div class="slider-item ">
+	      	<div class="overlay"></div>
+	         <div class="container">
+	          <div class="row d-md-flex no-gutters slider-text align-items-end justify-content-end" data-scrollax-parent="true">
+	          	<div class="one-third js-fullheight order-md-last img" style="background-image:url(images/bg_1.png);">
+	          	 <div class="overlay"></div>
+	          	</div>
+		          <div class="one-forth d-flex  align-items-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
+		          	<div class="text">
+		          		<span class="subheading">Hello!</span>
+			            <h1 class="mb-4 mt-3">I'm <span>Aman Patel </span></h1>
 
-      <aside id="stage" class="reveal" aria-hidden="true"></aside>
+						<!-- Element to contain animated typing -->
+						<span id="typing-animation"></span>
+
+						<script defer>
+
+						// Initialize the typing animation
+						const typingAnimationElement = document.getElementById('typing-animation');
+
+						// Create an array of typing text
+						const typingTexts = [
+						'Lets Code & Deploy ',
+						'on Production '  ,
+						'with security ',
+						];
+
+						// Create a function to display the typing animation for a given text
+						function playTypingAnimation(text) {
+						// Loop through each character and add it to the element
+						for (let i = 0; i < text.length; i++) {
+							setTimeout(() => {
+							typingAnimationElement.textContent += text[i];
+							}, i * 200); // Increase the delay to slow down the typing animation
+						}
+
+						// Once the animation is complete, reset the text and start over
+						setTimeout(() => {
+							typingAnimationElement.textContent = '';
+							playTypingAnimation(typingTexts[(typingTexts.indexOf(text) + 1) % typingTexts.length]);
+						}, text.length * 200);
+						}
+
+						// Start the typing animation loop
+						playTypingAnimation(typingTexts[0]);
+
+						</script>
+
+						<br>
+						<br>
+			            <h2> DevOps & Platform Engineer </h2>
+						
+			            <p><a href="https://www.youtube.com/@AmanOps" target="_blank" class="btn btn-primary py-3 px-4">YouTube</a> 
+							<a href="https://github.com/amanpatelit" target="_blank" class="btn btn-white btn-outline-white py-3 px-4">Github</a></p>
+		            </div>
+		          </div>
+	        	</div>
+	        </div>
+	      </div>
+		</div>
     </section>
 
-    <section id="projects" class="projects reveal">
-      <h3 style="margin-top:28px">Featured Projects</h3>
-      <div class="grid">
-        <div class="card" data-info='{"title":"AutoScale Infra","desc":"Terraform modules with dynamic scaling & chaos tests"}'>
-          <div class="accent"></div>
-          <h4>AutoScale Infra</h4>
-          <p>Terraform • AWS • CICD</p>
-        </div>
-        <div class="card" data-info='{"title":"GitOps Platform","desc":"ArgoCD multi-cluster GitOps platform"}'>
-          <div class="accent"></div>
-          <h4>GitOps Platform</h4>
-          <p>ArgoCD • Helm • Git</p>
-        </div>
-        <div class="card" data-info='{"title":"Observability Stack","desc":"Prometheus+Grafana+Loki observability with alerts"}'>
-          <div class="accent"></div>
-          <h4>Observability Stack</h4>
-          <p>Prometheus • Grafana • Loki</p>
-        </div>
-        <div class="card" data-info='{"title":"K8s Cost Optimizer","desc":"Spot instance strategies and HPA tuning"}'>
-          <div class="accent"></div>
-          <h4>K8s Cost Optimizer</h4>
-          <p>Kubernetes • Cost</p>
-        </div>
-        <div class="card" data-info='{"title":"CI Templates","desc":"Reusable CI templates for GitHub Actions"}'>
-          <div class="accent"></div>
-          <h4>CI Templates</h4>
-          <p>GitHub Actions • CI</p>
-        </div>
-        <div class="card" data-info='{"title":"Infra Tests","desc":"Automated tests for infrastructure using Terratest"}'>
-          <div class="accent"></div>
-          <h4>Infra Tests</h4>
-          <p>Testing • Terratest</p>
-        </div>
-      </div>
+   <section class="ftco-about img ftco-section ftco-no-pb" id="about-section">
+    	<div class="container">
+			<div class="row">
+				<div class="row d-flex align-items-stretch">
+				<!-- <div class="row d-flex"> -->
+					<div class="col-md-6 col-lg-5 d-flex">
+						<div class="img-about img d-flex align-items-stretch">
+							<div class="overlay">
+								<div class="row">
+									<div class="col-sm-6 col-md-5">
+									  <div class="about-img">
+										<img decoding="async" loading="lazy" src="images/about-me.png" class="img-fluid rounded b-shadow-a" alt="">
+									  </div>
+									</div>
+									<!-- Details next to profile image -->
+									<div class="col-sm-6 col-md-7">
+									  <div class="about-info">
+										<p><span class="title-s">Name: </span> <span> Aman Patel </span></p>
+										<p><span class="title-s">Job Role: </span> <span> Sr.DevOps & Platform Engineer </span></p>
+										<p><span class="title-s">Experience: </span> <span> 5+ years </span></p>
+										<p><span class="title-s">Address: </span> <span> Noida, India </span></p>
+									  </div>
+									</div>
+								  </div>
+								  
+								<div class="skill-mf" id="skill-mf">
+									<p class="title-s">Skills</p>
+									<span>Networking</span> <span class="pull-right">90%</span>
+									<div class="progress">
+										<div class="progress-bar" id="Networking" role="progressbar" aria-valuenow="85" aria-valuemin="0"
+											aria-valuemax="100"></div>
+									</div>
+									<script defer>
+										var progressBar = document.getElementById("Networking");
+
+										
+									window.addEventListener("scroll", () => {
+										const rect = progressBar.getBoundingClientRect();
+										const isInViewport = (rect.top >= 0 && rect.bottom <= window.innerHeight);
+										if (isInViewport) {
+											// Your function to be called when the element is visible
+											updateProgress();
+											// Optionally, remove the event listener to avoid redundancy
+											window.removeEventListener("scroll", this);
+										}
+									});
+										function updateProgress() {        
+										var Networking = document.getElementById("Networking");
+										var CloudOps = document.getElementById("CloudOps");
+										var Visualization = document.getElementById("Visualization");
+										var DevSecOps = document.getElementById("DevSecOps");
+										var Machine = document.getElementById("Machine");
+
+										Networking.style.width = 90 + "%";
+										CloudOps.style.width = 85 + "%";
+										Visualization.style.width = 90 + "%";
+										DevSecOps.style.width = 90 + "%";
+										Machine.style.width = 80 + "%";
+										}
+									</script>
+									<span>CloudOps</span> <span class="pull-right">85%</span>
+									<div class="progress">
+										<div class="progress-bar" id="CloudOps" role="progressbar" aria-valuenow="85" aria-valuemin="0"
+											aria-valuemax="100"></div>
+									</div>
+									
+									<span>Visualization</span> <span class="pull-right">90%</span>
+									<div class="progress">
+										<div class="progress-bar" role="progressbar" id="Visualization" aria-valuenow="90" aria-valuemin="0"
+											aria-valuemax="100"></div>
+									</div>
+									
+									<span>DevSecOps</span> <span class="pull-right">90%</span>
+									<div class="progress">
+										<div class="progress-bar" role="progressbar" id="DevSecOps" aria-valuenow="85" aria-valuemin="0"
+											aria-valuemax="100"></div>
+									</div>
+									
+									<span>Machine Learning</span> <span class="pull-right">80%</span>
+									<div class="progress">
+										<div class="progress-bar" role="progressbar" id="Machine" aria-valuenow="80" aria-valuemin="0"
+											aria-valuemax="100"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="col-md-6 col-lg-7 pl-lg-5 pb-5">
+						<div class="row justify-content-start pb-3">
+							<div class="col-md-12 heading-section ftco-animate">
+								
+								<h1 class="big">About</h1>
+								<h2 class="mb-4">About Me</h2>
+								
+								<p>
+									I specialize in architecting, automating, and securing cloud infrastructure across multiple platforms, ensuring high performance, scalability, and resilience. With deep expertise in CI/CD pipelines, system administration, and real-time monitoring, I drive operational excellence through automation and innovative cloud solutions. My passion lies in building secure, efficient, and scalable ecosystems that empower businesses to accelerate their digital transformation with confidence.</p>
+								<ul class="about-info mt-4 px-md-0 px-2">
+									<li class="d-flex"><span>Profile:</span> <span>Multi Cloud DevOps Engineer</span></li>
+									<li class="d-flex"><span>Domain:</span> <span>Open Source Techonogies, Multi Clouds DevOps, GitOps</span></li>
+									<li class="d-flex"><span>Education:</span> <span>Bsc in IT </span></li>
+									<li class="d-flex"><span>Language:</span> <span>English, Hindi</span></li>
+									<li class="d-flex"><span>Interest:</span> <span> Open Source Technologies, Travel Photography, Teaching</span></li>
+									
+								</ul>
+							</div>
+						</div>
+
+
+						<div class="counter-wrap ftco-animate d-flex mt-md-3">
+							<div class="text">
+								<p class="mb-4">
+									<span class="number" data-number="12">0</span> <span>+</span>
+									<span>&nbsp; Projects completed</span>
+								</p>
+								<p><a href="https://www.linkedin.com/in/amanpatelofficial/" target="_blank" class="btn btn-primary py-3 px-3">LinkedIn</a></p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
     </section>
 
-    <section id="skills" class="two-col reveal">
-      <div>
-        <h3>Skills & Tools</h3>
-        <div style="display:grid;gap:12px;margin-top:8px">
-          <div class="panel">
-            <strong>Terraform</strong>
-            <div style="height:10px;background:rgba(255,255,255,0.03);border-radius:999px;margin-top:8px;overflow:hidden"><i data-p="92" style="display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accentA),var(--accentB));"></i></div>
-            <div style="height:8px"></div>
-            <strong>Kubernetes</strong>
-            <div style="height:10px;background:rgba(255,255,255,0.03);border-radius:999px;margin-top:8px;overflow:hidden"><i data-p="88" style="display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accentB),var(--accentC));"></i></div>
-            <div style="height:8px"></div>
-            <strong>CI/CD</strong>
-            <div style="height:10px;background:rgba(255,255,255,0.03);border-radius:999px;margin-top:8px;overflow:hidden"><i data-p="90" style="display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accentA),var(--accentC));"></i></div>
+
+
+	
+    <section class="ftco-section ftco-no-pb" id="resume-section">
+    	<div class="container">
+    		<div class="row justify-content-center pb-5">
+          <div class="col-md-10 heading-section text-center ftco-animate">
+          	<h1 class="big big-2">Resume</h1>
+            <h2 class="mb-4">Resume</h2>
+            <p>Seasoned Clouds & DevSecOps with 5+ years of experience driving business strategies through the Clouds & DevSecOps. Proven expertise in Cloud Infra , statistical analysis, machine learning algorithms and project management.</p>
           </div>
-          <div class="panel" style="display:flex;gap:12px;align-items:center;justify-content:space-between">
-            <div>
-              <h4 style="margin:0">Open Source</h4>
-              <p style="color:var(--muted);margin-top:6px">Contributor to infra templates and reusable CI libs.</p>
+        </div>
+
+		<div class="row">
+			<h1 class="big-4">Experience</h1>
+			<div class="underline"></div>
+		</div>
+		<br>
+		
+		<div class="row">
+			<div class="col-md-6">
+				<div class="resume-wrap ftco-animate">
+					<span class="date">2021-2022</span>
+					<h2> DevOps Admin</h2>
+					<span class="position">IP Sloutions Technologies</span>
+					<p class="mt-4"> DevOps Admin 
+						<ul>
+							<li>Migrated the RHEL Server form RHEL & to RHEL 8</li>
+							<li>Setup the Jenkins CI/CD for Production micro-servies</li>
+							<li>Reduce the size of docker image more then 80% for all the micro-servives running on production.</li>
+							<li>implemented the sonar for the scanning & improving the code quality.</li>
+						</ul>
+					</p>
+				</div>
+
+			</div>
+			<div class="col-md-6">
+				<div class="resume-wrap ftco-animate">
+					<span class="date">2022 - 2024</span>
+					<h2>DevOps Specialist</h2>
+					<span class="position">Opstree</span>
+					<p class="mt-4"> SRE- DevOps Engineer 
+						<ul>
+							<li>Designed and deployed EKS clusters to streamline operations and enhance application scalability.</li>
+							<li>As a dedicated DevOps Engineer and Platform Specialist, I specialize in building scalable, secure, and automated infrastructures that empower organizations to innovate with confidence. With expertise in cloud platforms like AWS and Google Cloud, I design and implement solutions that enhance performance and reliability.</li>
+							<li>Passionate about streamlining workflows, I leverage tools like Terraform, Kubernetes, and Helm to automate infrastructure deployment and management, ensuring seamless CI/CD pipelines and robust GitOps practices.</li>
+						</ul>
+					</p>
+				</div>
+
+			</div>
+			<div class="col-md-6">
+				<div class="resume-wrap ftco-animate">
+					<span class="date">2024-Till Date</span>
+					<h2>Software Engineer L2</h2>
+					<span class="position">Quokkalabs LLP</span>
+					<p class="mt-4"> DevOps Engineer & Platform Specialist @QL 
+						<ul>
+							<li>I bring a wealth of expertise in automating complex workflows, fortifying system security, and crafting resilient, scalable infrastructures that stand the test of time. With a passion for innovation, I specialize in streamlining deployments and delivering seamless, high-performance digital experiences that exceed expectations..</li>
+							<li>Empowering businesses with cutting-edge DevOps, DevSecOps, Platform Engineering, and GitOps solutions. I specialize in automating workflows, enhancing system security, and building resilient, scalable infrastructures. Passionate about driving innovation, streamlining deployments, and delivering seamless digital experiences. Let’s collaborate to transform ideas into impactful solutions!.</li>
+							<li>I am passionate about bridging the gap between operations and development, creating ecosystems where speed and reliability coexist. By continuously learning and adopting cutting-edge technologies, I aim to help organizations achieve operational excellence.
+
+							</li>
+						</ul>
+					</p>
+				</div>
+
+			</div>
+		</div>
+         
+		<br>
+		<br>
+
+		<div class="row">
+			<h1 class="big-4">Education</h1>
+			<div class="underline"></div>
+		</div>
+		<br>
+		
+		<div class="row">
+			<div class="col-md-6 col-sm-4">
+				<div class="resume-wrap ftco-animate">
+					<span class="date">2020–2022</span>
+					<h2>Bachelor of Science in Information Technologies </h2>
+					<span class="position">Kanpur University</span>
+					<p class="mt-4">Grade: First-Class Distinction</p>
+				</div>
+			</div>
+		
+			<div class="col-md-6 col-sm-4">
+				<div class="resume-wrap ftco-animate">
+					<span class="date">2018–2019</span>
+					<h2>Higher Secondary School</h2>
+					<span class="position">Lucknow Public Schools & Colleges</span>
+					<p class="mt-4">Grade: Second-Class Distinction</p>
+				</div>
+			</div>
+		</div>
+         <!--
+    		<div class="row justify-content-center mt-5">
+    			<div class="col-md-6 text-center ftco-animate">
+    				<p><a href="#" class="btn btn-primary py-4 px-5">Download CV</a></p>
+    		</div>
+    	</div>
+	-->	
+	
+    </section>
+
+   
+
+    <section class="ftco-section" id="project-section">
+      <div class="container">
+        <div class="row justify-content-center mb-5 pb-5">
+          <div class="col-md-7 heading-section text-center ftco-animate">
+            <h1 class="big big-2">Projects</h1>
+            <h2 class="mb-4">DevSecOps Workflow</h2>
+            <p>Below are the sample Clouds & DevSecOps projects on AWS with Security</p>
+          </div>
+        </div>
+        <div class="row d-flex">
+          <div class="col-md-4 d-flex ftco-animate">
+          	<div class="blog-entry justify-content-end">
+              <a href="https://github.com/amanpatelit" class="block-20 zoom-effect" style="background-image: url('images/proj_1.jpg');">
+              </a>
+              <div class="text mt-3 float-right d-block">
+
+                <h3 class="heading"><a href="https://github.com/amanpatelit">How to Crack AWS Solutions Architect Associate Exam</a></h3>
+                <p>AWS is crucial for businesses due to its market dominance, scalability, cost-effectiveness, global infrastructure, reliability, security, innovation, ecosystem, enabling digital transformation, enterprise adoption, and economic impact..</p>
+              </div>
             </div>
-            <div>
-              <button class="btn">View GitHub</button>
+          </div>
+          <div class="col-md-4 d-flex ftco-animate">
+          	<div class="blog-entry justify-content-end">
+              <a href="https://github.com/amanpatelit" class="block-20 zoom-effect" style="background-image: url('images/proj_2.jpg');">
+              </a>
+              <div class="text mt-3 float-right d-block">
+
+                <h3 class="heading"><a href="https://github.com/amanpatelit">DevSecOps is an approach that integrates security practices within the DevOps process to ensure secure software development and operations.</a></h3>
+                <p>DevSecOps, short for Development, Security, and Operations, is an approach that integrates security practices into every stage of the DevOps lifecycle to ensure secure software development and operations. It emphasizes te and best practices.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 d-flex ftco-animate">
+          	<div class="blog-entry">
+              <a href="https://github.com/amanpatelit" class="block-20 zoom-effect" style="background-image: url('images/proj_3.jpg');">
+              </a>
+              <div class="text mt-3 float-right d-block">
+
+                <h3 class="heading"><a href="https://github.com/amanpatelit">How to Handle DevOps Outages Like a Pro.</a></h3>
+                <p>When an outage hits, the first rule is simple — stay calm and communicate clearly. Panic spreads faster than errors. Begin by acknowledging the issue and notifying relevant teams via established incident channels (Slack, PagerDuty). Immediately assign clear ownership — one lead engineer to coordinate, one to investigate logs/metrics, and one to communicate with stakeholders.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+	<br>
+		<!-- added justify-content-center to center align the last two projects -->
+    </section>
+
+	<section class="ftco-section ftco-no-pt ftco-no-pb ftco-counter img" id="section-counter">
+      <div class="container">
+		<div class="row d-md-flex align-items-center">
+          <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
+            <div class="block-18">
+              <div class="text">
+                <strong class="number" data-number="5">0</strong>
+                <span>Achievements</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
+            <div class="block-18">
+              <div class="text">
+                <strong class="number" data-number="12">0</strong>
+                <span>Projects</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
+            <div class="block-18">
+              <div class="text">
+                <strong class="number" data-number="25">0</strong>
+                <span>Mentored Students</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
+            <div class="block-18">
+              <div class="text">
+                <strong class="number" data-number="50">0</strong>
+                <span>Book a Coffee</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
+	
+	  <div class="ftco-section ftco-hireme img margin-top" style="background-image: url(images/bg_1.jpg)">
+			<!-- <div class="container"> -->
+				<div class="row justify-content-center">
+					<div class="col-md-7 ftco-animate text-center">
+						<h2>More projects on<span> Github  </span> </h2>
+						<div class="heading"> <h4> I love to solve business problems & uncover hidden data stories </h4>
+						<br>
+						<p><a href="https://github.com/amanpatelit" class="btn btn-primary py-3 px-5">GitHub</a></p>
+						</div>
+					</div>
+				</div>
+			<!-- </div> -->
+		</div>
+	</section>
 
-      <aside>
-        <div class="panel">
-          <h4>Experience</h4>
-          <div style="color:var(--muted);margin-top:8px">Senior DevOps Engineer — 2023—Present<br/>Platform Engineer — 2020—2023</div>
-        </div>
-        <div style="height:12px"></div>
-        <div class="panel">
-          <h4>Contact</h4>
-          <div style="color:var(--muted);margin-top:8px">hello@yourdomain.com<br/>Bangalore, India</div>
-        </div>
-      </aside>
-    </section>
+		  <div class="container">
+			<br>
+			<br>
+			<div class="row justify-content-center">
+				<div class="col-md-7 ftco-animate text-center">
+					<h2>Have a<span> Question?  </span> <a href="https://docs.google.com/forms/d/e/1FAIpQLSe55mlzuLhCs8_HXQLs0aPcQSKFEhLAHnrkHznZMasPIVOsBg/viewform?usp=sf_link" target="_blank" class="btn btn-primary py-3 px-5">Click Here</a> </h2>
+				</div>
+			</div>
+				<br>
+					<ul class="ftco-footer-social list-unstyled d-flex justify-content-center align-items-center mb-0">
+					  <li class="ftco-animate normal-txt">Find me on  </li>
+					  <li class="ftco-animate"><a href="https://www.youtube.com/@AmanOps"><span class="icon-youtube"></span></a></li>
+					  <li class="ftco-animate"><a href="https://www.linkedin.com/in/amanpatelofficial/"><span class="icon-linkedin"></span></a></li>  
+				      <li class="ftco-animate"><a href="https://www.instagram.com/amanpatel.it"><span class="icon-instagram"></span></a></li>
+					  <li class="ftco-animate"><a href="https://www.github.com/amanpatelit"><span class="icon-github"></span></a></li>
+					</ul>
+				<br>
+		   </div>
+   </div>
+ </section>
 
-    <section id="contact" class="reveal">
-      <h3 style="margin-top:22px">Get in touch</h3>
-      <div class="contact" style="display:grid;grid-template-columns:1fr 320px;gap:12px">
-        <div>
-          <input id="name" placeholder="Your name" />
-          <div style="height:8px"></div>
-          <input id="email" placeholder="Email" />
-          <div style="height:8px"></div>
-          <textarea id="msg" placeholder="Tell me about the project"></textarea>
-          <div style="height:8px"></div>
-          <button class="btn" onclick="sendMessage()">Send message</button>
-        </div>
-        <aside class="panel">
-          <h4>Availability</h4>
-          <p style="color:var(--muted);margin-top:8px">Open to contract and full-time roles. Available from Jan 2026 for new engagements.</p>
-          <div style="height:6px"></div>
-          <button class="btn ghost" onclick="window.open('#')">Download CV</button>
-        </aside>
-      </div>
-    </section>
 
-    <footer>© 2025 Chaitanya S • Built with Three.js & GSAP</footer>
-  </div>
+ 
+	
+    <footer class="ftco-footer ftco-section">
+		<div class="container">
+		  <div class="row">
+			<div class="col-md-12 text-center">
+  
+			  <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+	Copyright &copy;<script defer>document.write(new Date().getFullYear());</script> All rights reserved | Let's Code & Deploy <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://amansdlc.com" target="_blank">amansdlc.com</a>
+	<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+			</div>
+		  </div>
+		</div>
 
-  <!-- floating cursor + glow -->
-  <div class="cursor" id="cursor"></div>
-  <div class="glow" id="glow" style="background:radial-gradient(circle,#7b61ff66,#00f5a022,transparent)"></div>
+	</footer>
 
-  <!-- Modal template (hidden) -->
-  <div id="modalRoot" style="display:none"></div>
 
-  <script>
-    // ------- small UX polish: cursor + glow -------
-    const cursor = document.getElementById('cursor'); const glow = document.getElementById('glow');
-    window.addEventListener('mousemove',(e)=>{cursor.style.left = e.clientX+'px'; cursor.style.top = e.clientY+'px'; glow.style.left = e.clientX+'px'; glow.style.top = e.clientY+'px';});
+  <!-- loader -->
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
-    // reveal animations on load
-    window.addEventListener('load', ()=>{
-      document.querySelectorAll('.reveal').forEach((el,i)=>setTimeout(()=>el.classList.add('show'),120*i));
-      // animate progress bars
-      document.querySelectorAll('[data-p]').forEach((el,idx)=>{
-        const to = +el.getAttribute('data-p'); gsap.to(el,{width:to+'%',duration:1.2,delay:0.2*idx,ease:'power2.out'});
-      });
-    });
 
-    // projects modal quick preview
-    document.querySelectorAll('.card').forEach(card=>{
-      card.addEventListener('click', ()=>{
-        const info = JSON.parse(card.getAttribute('data-info'));
-        const m = document.createElement('div'); m.style.position='fixed'; m.style.inset='0'; m.style.background='rgba(2,6,23,0.7)'; m.style.display='flex'; m.style.alignItems='center'; m.style.justifyContent='center'; m.style.zIndex=9999;
-        m.innerHTML = `<div style=\"width:860px;max-width:95%;border-radius:12px;padding:18px;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);border:1px solid rgba(255,255,255,0.04);\"><h2>${info.title}</h2><p style='color:${'var(--muted)'}'>${info.desc}</p><div style='margin-top:12px;display:flex;gap:8px'><button class='btn' id='closeModal'>Close</button><button class='btn ghost' onclick=\"alert('Open demo/repo (demo)')\">Open demo</button></div></div>`;
-        document.body.appendChild(m);
-        m.querySelector('#closeModal').addEventListener('click',()=>{m.remove()});
-      });
-    });
-
-    // CTA scroll
-    document.getElementById('ctaProjects').addEventListener('click', ()=>document.getElementById('projects').scrollIntoView({behavior:'smooth'}));
-
-    // dummy contact
-    function sendMessage(){const n=document.getElementById('name').value||'Friend'; const e=document.getElementById('email').value||'you@you.com'; alert(`Thanks ${n}! I'll reach out to ${e} — demo`)}
-
-    // ----------------- Three.js immersive scene -----------------
-    (function(){
-      const wrap = document.getElementById('stage');
-      if(!wrap) return; if(!window.WebGLRenderingContext){wrap.innerHTML='<div style="padding:20px;color:var(--muted)">3D not supported in this browser.</div>';return}
-
-      const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(45, wrap.clientWidth/wrap.clientHeight, 0.1, 1000);
-      camera.position.set(0,0,6);
-      const renderer = new THREE.WebGLRenderer({antialias:true,alpha:true}); renderer.setPixelRatio(window.devicePixelRatio); renderer.setSize(wrap.clientWidth, wrap.clientHeight); renderer.outputEncoding = THREE.sRGBEncoding;
-      wrap.appendChild(renderer.domElement);
-
-      // HDR-like lights
-      const light = new THREE.DirectionalLight(0xffffff,1.1); light.position.set(5,5,5); scene.add(light);
-      scene.add(new THREE.AmbientLight(0xffffff,0.25));
-
-      // organic blob - icosahedron + noise vertex displacement
-      const geom = new THREE.IcosahedronGeometry(1.6, 5);
-      const mat = new THREE.MeshStandardMaterial({color:0x7b61ff,metalness:0.45,roughness:0.18,emissive:0x0a0520,clearcoat:0.2});
-      const blob = new THREE.Mesh(geom, mat); scene.add(blob);
-
-      // subtle wireframe overlay
-      const wf = new THREE.LineSegments(new THREE.WireframeGeometry(geom), new THREE.LineBasicMaterial({color:0xffffff,transparent:true,opacity:0.04})); scene.add(wf);
-
-      // particle halo
-      const count = 300; const pos = new Float32Array(count*3);
-      for(let i=0;i<count;i++){const r=2.2+Math.random()*1.6; const theta=Math.random()*Math.PI*2; const phi=Math.acos(2*Math.random()-1); pos[i*3]=Math.sin(phi)*Math.cos(theta)*r; pos[i*3+1]=Math.sin(phi)*Math.sin(theta)*r; pos[i*3+2]=Math.cos(phi)*r}
-      const pgeo = new THREE.BufferGeometry(); pgeo.setAttribute('position', new THREE.BufferAttribute(pos,3));
-      const pmat = new THREE.PointsMaterial({size:0.02,color:0x00f5a0,transparent:true,opacity:0.85});
-      const points = new THREE.Points(pgeo, pmat); scene.add(points);
-
-      // animate vertex noise
-      const basePositions = geom.attributes.position.array.slice();
-      function noise(t){return (Math.sin(t)+Math.cos(t*1.3))*0.5}
-
-      // pointer parallax control
-      let rx=0, ry=0; wrap.addEventListener('mousemove',(e)=>{const r=wrap.getBoundingClientRect();ry=(e.clientX-r.left)/r.width-0.5; rx=(e.clientY-r.top)/r.height-0.5});
-
-      // resize
-      window.addEventListener('resize', ()=>{renderer.setSize(wrap.clientWidth, wrap.clientHeight); camera.aspect = wrap.clientWidth/wrap.clientHeight; camera.updateProjectionMatrix();});
-
-      // render loop
-      let t=0; function animate(){requestAnimationFrame(animate); t+=0.008;
-        // deform blob
-        const positions = geom.attributes.position.array;
-        for(let i=0;i<positions.length;i+=3){const vx = basePositions[i], vy = basePositions[i+1], vz = basePositions[i+2]; const d = 1 + 0.12*noise((vx+vy+vz)*2 + t*3); positions[i] = vx * d; positions[i+1] = vy * d; positions[i+2] = vz * d}
-        geom.attributes.position.needsUpdate = true; geom.computeVertexNormals();
-
-        blob.rotation.y += 0.004; blob.rotation.x += 0.0012;
-        wf.rotation.copy(blob.rotation);
-        // parallax
-        blob.position.x += (ry*0.6 - blob.position.x) * 0.06; blob.position.y += (-rx*0.45 - blob.position.y) * 0.06;
-        points.rotation.y += -0.0012;
-        renderer.render(scene,camera);
-      }
-      animate();
-    })();
-  </script>
-</body>
+  <script defer src="js/jquery.min.js"></script>
+  <script defer src="js/jquery-migrate-3.0.1.min.js"></script>
+  <script defer src="js/popper.min.js"></script>
+  <script defer src="js/bootstrap.min.js"></script>
+  <script defer src="js/jquery.easing.1.3.js"></script>
+  <script defer src="js/jquery.waypoints.min.js"></script>
+  <script defer src="js/jquery.stellar.min.js"></script>
+  <script defer src="js/owl.carousel.min.js"></script>
+  <script defer src="js/jquery.magnific-popup.min.js"></script>
+  <script defer src="js/aos.js"></script>
+  <script defer src="js/jquery.animateNumber.min.js"></script>
+  <script defer src="js/scrollax.min.js"></script>
+  
+  <script defer src="js/main.js"></script>
+    
+  </body>
 </html>

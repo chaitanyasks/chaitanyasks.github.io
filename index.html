@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>DevOps — Portfolio</title>
+  <meta name="description" content="Modern DevOps portfolio with 3D hero, animated timeline, interactive project cards, and theme toggle." />
+
+  <!-- three.js for 3D hero -->
+  <script src="https://unpkg.com/three@0.155.0/build/three.min.js" defer></script>
+
+  <style>
+    :root{
+      --bg:#0b1020;
+      --card:#0f1724;
+      --glass: rgba(255,255,255,0.04);
+      --accent:#7c5cff;
+      --muted: #9aa4bd;
+      --glass-2: rgba(124,92,255,0.08);
+      --glass-border: rgba(255,255,255,0.06);
+      --glass-border-2: rgba(124,92,255,0.12);
+      --radius:16px;
+    }
+    @media (prefers-color-scheme: light){
+      :root{
+        --bg: #f6f8fb;
+        --card: #ffffff;
+        --glass: rgba(10,12,18,0.04);
+        --accent:#6b4cff;
+        --muted:#475569;
+        --glass-border: rgba(0,0,0,0.06);
+      }
+    }
+
+    /* Basic reset */
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:var(--bg); color: #e6eef8;}
+
+    /* Layout */
+    .wrap{max-width:1200px;margin:36px auto;padding:28px;}
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#00c2ff);display:flex;align-items:center;justify-content:center;font-weight:700;box-shadow:0 6px 24px rgba(0,0,0,0.35);}
+    h1{font-size:1.25rem;margin:0}
+    .tag{font-size:0.85rem;color:var(--muted)}
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1fr 460px;gap:28px;align-items:center;margin-top:28px}
+    .intro{padding:28px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border-radius:var(--radius);backdrop-filter: blur(6px);border:1px solid var(--glass-border)}
+    .intro h2{font-size:2rem;margin:0 0 8px}
+    .intro p{color:var(--muted);line-height:1.5}
+    .cta{margin-top:18px;display:flex;gap:12px}
+    .btn{padding:10px 16px;border-radius:12px;border:none;cursor:pointer;background:linear-gradient(90deg,var(--accent),#00c2ff);color:white;box-shadow:0 8px 30px rgba(124,92,255,0.14);}
+    .ghost{background:transparent;border:1px solid var(--glass-border);color:var(--muted)}
+
+    /* 3D container */
+    #scene-wrap{height:420px;border-radius:var(--radius);overflow:hidden;border:1px solid var(--glass-border-2);background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(124,92,255,0.02));box-shadow:0 12px 40px rgba(2,6,23,0.6)}
+
+    /* Cards */
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:28px}
+    .card{padding:18px;border-radius:12px;background:linear-gradient(180deg,var(--card),rgba(255,255,255,0.02));border:1px solid var(--glass-border);transform-style:preserve-3d;transition:transform 350ms cubic-bezier(.2,.9,.3,1), box-shadow 250ms;cursor:pointer}
+    .card:hover{transform:translateY(-8px) rotateX(6deg) rotateY(-4deg);box-shadow:0 20px 40px rgba(2,6,23,0.6)}
+    .card h3{margin:0 0 8px}
+    .meta{color:var(--muted);font-size:0.9rem}
+
+    /* Timeline */
+    .timeline{margin-top:28px;padding:18px;border-radius:12px;background:linear-gradient(180deg,transparent, rgba(255,255,255,0.01));border:1px solid var(--glass-border)}
+    .event{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px dashed rgba(255,255,255,0.02)}
+    .dot{width:12px;height:12px;border-radius:6px;background:var(--accent);flex:0 0 12px;margin-top:6px}
+    .event h4{margin:0;font-size:1rem}
+    .event p{margin:4px 0 0;color:var(--muted);font-size:0.95rem}
+
+    /* Footer / Contact */
+    footer{margin-top:28px;display:flex;justify-content:space-between;align-items:center;gap:16px}
+    form{display:flex;gap:10px}
+    input[type=text], input[type=email]{padding:10px;border-radius:10px;border:1px solid var(--glass-border);background:transparent;color:inherit}
+
+    /* small screens */
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr;}
+      .grid{grid-template-columns:repeat(2,1fr)}
+      #scene-wrap{height:320px}
+    }
+    @media (max-width:560px){
+      .grid{grid-template-columns:1fr}
+      header{flex-direction:column;align-items:flex-start}
+      .brand{width:100%}
+    }
+
+    /* subtle floating animation for logo */
+    .logo{animation:float 6s ease-in-out infinite}
+    @keyframes float{0%{transform:translateY(0)}50%{transform:translateY(-6px)}100%{transform:translateY(0)}}
+
+    /* Animated reveal */
+    .reveal{opacity:0;transform:translateY(20px);transition:opacity 600ms ease, transform 600ms ease}
+    .reveal.active{opacity:1;transform:translateY(0)}
+
+    /* tilt effect perspective container */
+    .tilt{perspective:1000px}
+
+    /* terminal mock */
+    .terminal{padding:14px;border-radius:10px;background:linear-gradient(180deg, rgba(0,0,0,0.35), rgba(0,0,0,0.15));font-family:monospace;color:#cbe4ff;border:1px solid rgba(255,255,255,0.03)}
+
+    /* small helpers */
+    .muted{color:var(--muted)}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo">DV</div>
+        <div>
+          <h1>DevOps — Chaitanya S K S</h1>
+          <div class="tag">Cloud automation • CI/CD • Infrastructure as Code</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <button id="themeToggle" class="btn ghost">Toggle Theme</button>
+        <a class="btn" href="#projects">View projects</a>
+      </div>
+    </header>
+
+    <main class="hero">
+      <section class="intro reveal">
+        <h2>Modern DevOps engineer building resilient systems</h2>
+        <p>Specialized in infrastructure as code (Terraform, CloudFormation), Kubernetes, CI/CD pipelines (GitHub Actions, GitLab CI), monitoring & observability, and cost-optimised cloud architectures. I design repeatable, secure, and testable deployment workflows.</p>
+
+        <div class="cta">
+          <button class="btn">Hire me</button>
+          <button class="btn ghost">Download resume</button>
+        </div>
+
+        <div style="margin-top:18px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+          <div class="card tilt" data-tilt>
+            <h3>CI/CD</h3>
+            <div class="meta">GitHub Actions, Jenkins, ArgoCD</div>
+          </div>
+          <div class="card tilt" data-tilt>
+            <h3>Infrastructure</h3>
+            <div class="meta">Terraform, CloudFormation, Pulumi</div>
+          </div>
+          <div class="card tilt" data-tilt>
+            <h3>Containers</h3>
+            <div class="meta">Docker, Kubernetes, Helm</div>
+          </div>
+        </div>
+
+      </section>
+
+      <aside id="scene-wrap" aria-hidden="true"></aside>
+    </main>
+
+    <section id="projects" class="reveal">
+      <h3 style="margin-top:28px">Projects & demos</h3>
+      <div class="grid">
+        <article class="card tilt" data-tilt>
+          <h3>Autoscale Infra</h3>
+          <p class="meta">Terraform + AWS + Spot fleets — automated scale & testing</p>
+        </article>
+        <article class="card tilt" data-tilt>
+          <h3>GitOps Platform</h3>
+          <p class="meta">ArgoCD + Flux for multi-cluster delivery</p>
+        </article>
+        <article class="card tilt" data-tilt>
+          <h3>Observability Stack</h3>
+          <p class="meta">Prometheus, Loki, Grafana dashboards with alerts</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="timeline reveal">
+      <h3>Experience timeline</h3>
+      <div class="event">
+        <div class="dot"></div>
+        <div>
+          <h4>Senior DevOps Engineer — AcmeCloud</h4>
+          <p class="muted">2023 — Present • Designed multi-region infra, reduced costs 31%</p>
+        </div>
+      </div>
+      <div class="event">
+        <div class="dot"></div>
+        <div>
+          <h4>Platform Engineer — InfraCo</h4>
+          <p class="muted">2020 — 2023 • Built CI/CD platform for 60+ microservices</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="reveal" style="margin-top:20px;display:grid;grid-template-columns:1fr 360px;gap:18px;align-items:start">
+      <div>
+        <h3>Live terminal</h3>
+        <div class="terminal" id="terminal">$ npm run deploy
+Initializing...<br/></div>
+      </div>
+      <aside>
+        <h3>Contact</h3>
+        <form onsubmit="event.preventDefault();alert('Thanks — message sent (demo)')">
+          <input type="text" placeholder="Name" required />
+          <input type="email" placeholder="Email" required />
+          <button class="btn" type="submit">Send</button>
+        </form>
+      </aside>
+    </section>
+
+    <footer>
+      <div class="muted">© 2025 Chaitanya — DevOps & Cloud</div>
+      <div class="muted">Built with HTML, CSS, JS • 3D hero</div>
+    </footer>
+  </div>
+
+  <script>
+    // Theme toggle with persistence
+    const themeToggle = document.getElementById('themeToggle');
+    themeToggle.addEventListener('click', ()=>{
+      const current = document.documentElement.getAttribute('data-theme');
+      if(current === 'light'){
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.removeItem('pref-theme');
+      } else {
+        document.documentElement.setAttribute('data-theme','light');
+        localStorage.setItem('pref-theme','light');
+      }
+    });
+    if(localStorage.getItem('pref-theme')==='light'){document.documentElement.setAttribute('data-theme','light')}
+
+    // Reveal on scroll
+    const reveals = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('active'); });
+    },{threshold:0.12});
+    reveals.forEach(r=>io.observe(r));
+
+    // Tilt effect for cards (simple 3D tilt)
+    const tilts = document.querySelectorAll('[data-tilt]');
+    tilts.forEach(el=>{
+      el.addEventListener('mousemove', (e)=>{
+        const rect = el.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        const rx = y * -10; const ry = x * 14;
+        el.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg) translateZ(8px)`;
+      });
+      el.addEventListener('mouseleave', ()=> el.style.transform = 'translateZ(0)');
+    });
+
+    // Terminal demo typing
+    const terminal = document.getElementById('terminal');
+    const lines = [
+      '$ git clone git@github.com:yourname/infra.git',
+      '$ cd infra && terraform apply',
+      '$ kubectl rollout status deployment/web',
+      '$ echo "deploy complete"'
+    ];
+    let idx=0; function typeLine(){
+      if(idx>=lines.length) return;
+      let i=0; const line=lines[idx]+'\n';
+      const t = setInterval(()=>{
+        terminal.innerHTML += line[i]; i++; terminal.scrollTop = terminal.scrollHeight;
+        if(i>=line.length){ clearInterval(t); idx++; setTimeout(typeLine,600); }
+      },24);
+    }
+    setTimeout(typeLine,900);
+
+    // three.js 3D hero (rotating low-poly torus + subtle hover parallax)
+    (function(){
+      const wrap = document.getElementById('scene-wrap');
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(40, wrap.clientWidth / wrap.clientHeight, 0.1, 100);
+      camera.position.z = 4;
+      const renderer = new THREE.WebGLRenderer({alpha:true,antialias:true});
+      renderer.setSize(wrap.clientWidth, wrap.clientHeight);
+      renderer.setPixelRatio(window.devicePixelRatio);
+      wrap.appendChild(renderer.domElement);
+
+      const light = new THREE.PointLight(0xffffff,1.1);
+      light.position.set(5,5,5); scene.add(light);
+      const light2 = new THREE.AmbientLight(0x404050,0.6); scene.add(light2);
+
+      // geometry + material
+      const geom = new THREE.TorusKnotGeometry(0.9,0.28,160,20,2,3);
+      const mat = new THREE.MeshStandardMaterial({metalness:0.7, roughness:0.2, envMapIntensity:1, color:0x7c5cff});
+      const mesh = new THREE.Mesh(geom, mat); scene.add(mesh);
+
+      // wireframe clone for depth
+      const geo2 = geom.clone();
+      const mat2 = new THREE.LineBasicMaterial({color:0xffffff,opacity:0.06,transparent:true});
+      const wire = new THREE.LineSegments(new THREE.WireframeGeometry(geo2), mat2); scene.add(wire);
+
+      // resize handling
+      window.addEventListener('resize', ()=>{
+        renderer.setSize(wrap.clientWidth, wrap.clientHeight);
+        camera.aspect = wrap.clientWidth / wrap.clientHeight; camera.updateProjectionMatrix();
+      });
+
+      // pointer parallax
+      let targetX=0, targetY=0;
+      window.addEventListener('mousemove',(e)=>{
+        const rect = wrap.getBoundingClientRect();
+        const x = (e.clientX - rect.left)/rect.width -0.5; const y=(e.clientY-rect.top)/rect.height-0.5;
+        targetX = x * 0.6; targetY = y * 0.6;
+      });
+
+      // animate
+      function animate(){
+        requestAnimationFrame(animate);
+        mesh.rotation.x += 0.005; mesh.rotation.y += 0.006;
+        wire.rotation.x = mesh.rotation.x * 1.01; wire.rotation.y = mesh.rotation.y * 1.02;
+        // parallax
+        mesh.position.x += (targetX - mesh.position.x) * 0.05;
+        mesh.position.y += (-targetY - mesh.position.y) * 0.05;
+        renderer.render(scene, camera);
+      }
+      animate();
+    })();
+
+    // small progressive enhancement: if WebGL unsupported, show fallback
+    if(!window.WebGLRenderingContext){
+      const wrap = document.getElementById('scene-wrap');
+      wrap.innerHTML = '<div style="padding:20px;color:var(--muted)">3D preview unavailable — your browser does not support WebGL.</div>';
+    }
+  </script>
+</body>
+</html>

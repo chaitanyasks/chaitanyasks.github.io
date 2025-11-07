@@ -3,322 +3,332 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>DevOps — Portfolio</title>
-  <meta name="description" content="Modern DevOps portfolio with 3D hero, animated timeline, interactive project cards, and theme toggle." />
+  <title>Chaitanya — Modern 3D DevOps Portfolio</title>
+  <meta name="description" content="Modern, trendy DevOps portfolio with immersive 3D hero, smooth animations and vibrant UI." />
 
-  <!-- three.js for 3D hero -->
+  <!-- three.js + gsap -->
   <script src="https://unpkg.com/three@0.155.0/build/three.min.js" defer></script>
+  <script src="https://unpkg.com/three@0.155.0/examples/js/controls/OrbitControls.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.0/gsap.min.js" defer></script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 
   <style>
+    /* ---------- Theme: Ultra-modern neon glass ---------- */
     :root{
-      --bg:#0b1020;
-      --card:#0f1724;
-      --glass: rgba(255,255,255,0.04);
-      --accent:#7c5cff;
-      --muted: #9aa4bd;
-      --glass-2: rgba(124,92,255,0.08);
-      --glass-border: rgba(255,255,255,0.06);
-      --glass-border-2: rgba(124,92,255,0.12);
-      --radius:16px;
+      --bg:#05030a; --panel: rgba(255,255,255,0.03); --glass-border: rgba(255,255,255,0.06);
+      --accentA: #00f5a0; --accentB: #7b61ff; --accentC: #ff4d8d; --muted:#9aa4bd;
+      --card: rgba(255,255,255,0.02); --radius:18px; --glass: rgba(255,255,255,0.02);
     }
-    @media (prefers-color-scheme: light){
-      :root{
-        --bg: #f6f8fb;
-        --card: #ffffff;
-        --glass: rgba(10,12,18,0.04);
-        --accent:#6b4cff;
-        --muted:#475569;
-        --glass-border: rgba(0,0,0,0.06);
-      }
-    }
-
-    /* Basic reset */
     *{box-sizing:border-box}
-    html,body{height:100%;margin:0;font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:var(--bg); color: #e6eef8;}
+    html,body{height:100%;margin:0;background:radial-gradient(1200px 500px at 10% 10%, rgba(123,97,255,0.08), transparent), radial-gradient(900px 400px at 95% 80%, rgba(255,77,141,0.06), transparent), var(--bg);font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial;color:#eaf2ff}
 
-    /* Layout */
-    .wrap{max-width:1200px;margin:36px auto;padding:28px;}
-    header{display:flex;align-items:center;justify-content:space-between;gap:16px}
-    .brand{display:flex;gap:12px;align-items:center}
-    .logo{width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#00c2ff);display:flex;align-items:center;justify-content:center;font-weight:700;box-shadow:0 6px 24px rgba(0,0,0,0.35);}
-    h1{font-size:1.25rem;margin:0}
-    .tag{font-size:0.85rem;color:var(--muted)}
+    /* layout */
+    .app{max-width:1200px;margin:28px auto;padding:28px}
+    header{display:flex;justify-content:space-between;align-items:center;gap:18px}
+    .brand{display:flex;align-items:center;gap:14px}
+    .logo{width:64px;height:64px;border-radius:14px;background:linear-gradient(135deg,var(--accentB),var(--accentA));display:flex;align-items:center;justify-content:center;font-weight:900;box-shadow:0 18px 60px rgba(123,97,255,0.12)}
+    .brand h1{margin:0;font-size:1.1rem}
+    nav a{color:var(--muted);text-decoration:none;margin-left:12px;padding:8px 10px;border-radius:12px}
+    nav a:hover{color:white;background:rgba(255,255,255,0.02)}
 
-    /* Hero */
-    .hero{display:grid;grid-template-columns:1fr 460px;gap:28px;align-items:center;margin-top:28px}
-    .intro{padding:28px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border-radius:var(--radius);backdrop-filter: blur(6px);border:1px solid var(--glass-border)}
-    .intro h2{font-size:2rem;margin:0 0 8px}
-    .intro p{color:var(--muted);line-height:1.5}
-    .cta{margin-top:18px;display:flex;gap:12px}
-    .btn{padding:10px 16px;border-radius:12px;border:none;cursor:pointer;background:linear-gradient(90deg,var(--accent),#00c2ff);color:white;box-shadow:0 8px 30px rgba(124,92,255,0.14);}
-    .ghost{background:transparent;border:1px solid var(--glass-border);color:var(--muted)}
+    /* hero layout - full width immersive */
+    .hero-wrap{display:grid;grid-template-columns:1fr 520px;gap:28px;margin-top:22px;align-items:center}
+    .hero-card{padding:28px;border-radius:20px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border:1px solid var(--glass-border);backdrop-filter: blur(8px);box-shadow:0 20px 60px rgba(2,6,23,0.6)}
+    .kicker{display:inline-block;padding:6px 12px;border-radius:999px;background:linear-gradient(90deg,var(--accentA),var(--accentB));font-weight:700;color:#04121f}
+    h2{font-size:2.4rem;margin:12px 0}
+    p.lead{color:var(--muted);line-height:1.6}
+    .cta{display:flex;gap:12px;margin-top:18px}
+    .btn{padding:12px 16px;border-radius:12px;border:none;background:linear-gradient(90deg,var(--accentB),var(--accentA));color:#04121f;font-weight:700;cursor:pointer;box-shadow:0 14px 40px rgba(123,97,255,0.12)}
+    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted)}
 
-    /* 3D container */
-    #scene-wrap{height:420px;border-radius:var(--radius);overflow:hidden;border:1px solid var(--glass-border-2);background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(124,92,255,0.02));box-shadow:0 12px 40px rgba(2,6,23,0.6)}
+    /* 3D canvas container - bigger, curved */
+    #stage{height:560px;border-radius:24px;overflow:hidden;border:1px solid rgba(255,255,255,0.035);background:linear-gradient(180deg, rgba(11,8,20,0.8), rgba(8,6,15,0.6))}
 
-    /* Cards */
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:28px}
-    .card{padding:18px;border-radius:12px;background:linear-gradient(180deg,var(--card),rgba(255,255,255,0.02));border:1px solid var(--glass-border);transform-style:preserve-3d;transition:transform 350ms cubic-bezier(.2,.9,.3,1), box-shadow 250ms;cursor:pointer}
-    .card:hover{transform:translateY(-8px) rotateX(6deg) rotateY(-4deg);box-shadow:0 20px 40px rgba(2,6,23,0.6)}
-    .card h3{margin:0 0 8px}
-    .meta{color:var(--muted);font-size:0.9rem}
+    /* floating quick links */
+    .quick{display:flex;gap:8px;margin-top:14px}
+    .chip{padding:8px 10px;border-radius:12px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));font-weight:600;color:var(--muted);border:1px solid rgba(255,255,255,0.02)}
 
-    /* Timeline */
-    .timeline{margin-top:28px;padding:18px;border-radius:12px;background:linear-gradient(180deg,transparent, rgba(255,255,255,0.01));border:1px solid var(--glass-border)}
-    .event{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px dashed rgba(255,255,255,0.02)}
-    .dot{width:12px;height:12px;border-radius:6px;background:var(--accent);flex:0 0 12px;margin-top:6px}
-    .event h4{margin:0;font-size:1rem}
-    .event p{margin:4px 0 0;color:var(--muted);font-size:0.95rem}
+    /* projects grid modern cards */
+    .projects{margin-top:32px}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .card{position:relative;border-radius:14px;padding:18px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03);overflow:hidden;cursor:pointer}
+    .card .accent{position:absolute;right:-60px;top:-40px;width:200px;height:200px;border-radius:60px;background:linear-gradient(135deg,var(--accentC),var(--accentA));opacity:0.08;transform:rotate(25deg)}
+    .card h4{margin:0}
+    .card p{margin-top:8px;color:var(--muted)}
 
-    /* Footer / Contact */
-    footer{margin-top:28px;display:flex;justify-content:space-between;align-items:center;gap:16px}
-    form{display:flex;gap:10px}
-    input[type=text], input[type=email]{padding:10px;border-radius:10px;border:1px solid var(--glass-border);background:transparent;color:inherit}
+    /* feature strip */
+    .features{display:flex;gap:12px;margin-top:22px}
+    .feature{flex:1;padding:14px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border:1px solid rgba(255,255,255,0.02);}
 
-    /* small screens */
-    @media (max-width:980px){
-      .hero{grid-template-columns:1fr;}
-      .grid{grid-template-columns:repeat(2,1fr)}
-      #scene-wrap{height:320px}
-    }
-    @media (max-width:560px){
-      .grid{grid-template-columns:1fr}
-      header{flex-direction:column;align-items:flex-start}
-      .brand{width:100%}
-    }
+    /* timeline + skills */
+    .two-col{display:grid;grid-template-columns:1fr 360px;gap:18px;margin-top:24px}
+    .panel{padding:16px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border:1px solid rgba(255,255,255,0.02)}
 
-    /* subtle floating animation for logo */
-    .logo{animation:float 6s ease-in-out infinite}
-    @keyframes float{0%{transform:translateY(0)}50%{transform:translateY(-6px)}100%{transform:translateY(0)}}
+    /* contact */
+    .contact{margin-top:28px;padding:18px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border:1px solid rgba(255,255,255,0.02)}
+    input,textarea{width:100%;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit}
 
-    /* Animated reveal */
-    .reveal{opacity:0;transform:translateY(20px);transition:opacity 600ms ease, transform 600ms ease}
-    .reveal.active{opacity:1;transform:translateY(0)}
+    /* footer */
+    footer{margin-top:28px;text-align:center;color:var(--muted)}
 
-    /* tilt effect perspective container */
-    .tilt{perspective:1000px}
+    /* responsive */
+    @media (max-width:1000px){.hero-wrap{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,1fr)}.two-col{grid-template-columns:1fr}.logo{width:52px;height:52px}}
+    @media (max-width:600px){.grid{grid-template-columns:1fr}nav{display:flex;flex-direction:column;gap:8px}}
 
-    /* terminal mock */
-    .terminal{padding:14px;border-radius:10px;background:linear-gradient(180deg, rgba(0,0,0,0.35), rgba(0,0,0,0.15));font-family:monospace;color:#cbe4ff;border:1px solid rgba(255,255,255,0.03)}
+    /* cursor + micro interactions */
+    .cursor{position:fixed;pointer-events:none;z-index:9999;width:18px;height:18px;border-radius:50%;transform:translate(-50%,-50%);mix-blend-mode:screen;border:1px solid rgba(255,255,255,0.14)}
+    .glow{position:fixed;pointer-events:none;z-index:9998;width:200px;height:200px;border-radius:50%;transform:translate(-50%,-50%);filter:blur(40px);opacity:0.6}
 
-    /* small helpers */
-    .muted{color:var(--muted)}
+    /* entrance animation helpers */
+    .reveal{opacity:0;transform:translateY(12px);transition:all .6s cubic-bezier(.2,.9,.3,1)}
+    .reveal.show{opacity:1;transform:none}
   </style>
 </head>
 <body>
-  <div class="wrap">
+  <div class="app">
     <header>
       <div class="brand">
-        <div class="logo">DV</div>
+        <div class="logo">CS</div>
         <div>
-          <h1>DevOps — Chaitanya S K S</h1>
-          <div class="tag">Cloud automation • CI/CD • Infrastructure as Code</div>
+          <h1>Chaitanya — DevOps</h1>
+          <div style="font-size:.85rem;color:var(--muted)">Cloud Architect • Platform Engineer • Automation</div>
         </div>
       </div>
-      <div style="display:flex;align-items:center;gap:12px">
-        <button id="themeToggle" class="btn ghost">Toggle Theme</button>
-        <a class="btn" href="#projects">View projects</a>
-      </div>
+      <nav>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+        <a class="btn" href="#hire">Hire me</a>
+      </nav>
     </header>
 
-    <main class="hero">
-      <section class="intro reveal">
-        <h2>Modern DevOps engineer building resilient systems</h2>
-        <p>Specialized in infrastructure as code (Terraform, CloudFormation), Kubernetes, CI/CD pipelines (GitHub Actions, GitLab CI), monitoring & observability, and cost-optimised cloud architectures. I design repeatable, secure, and testable deployment workflows.</p>
-
+    <section class="hero-wrap">
+      <div class="hero-card reveal" id="intro">
+        <div class="kicker">Lead DevOps • Platform</div>
+        <h2>Building resilient cloud platforms and frictionless delivery pipelines</h2>
+        <p class="lead">I design and implement IaC, GitOps-driven delivery, and observability stacks. My craft: making deployments repeatable, secure, and delightfully boring — so engineers can ship faster.</p>
         <div class="cta">
-          <button class="btn">Hire me</button>
-          <button class="btn ghost">Download resume</button>
+          <button class="btn" id="ctaProjects">See projects</button>
+          <button class="btn ghost">Get résumé</button>
         </div>
-
-        <div style="margin-top:18px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
-          <div class="card tilt" data-tilt>
-            <h3>CI/CD</h3>
-            <div class="meta">GitHub Actions, Jenkins, ArgoCD</div>
+        <div class="quick">
+          <div class="chip">Terraform</div>
+          <div class="chip">Kubernetes</div>
+          <div class="chip">ArgoCD</div>
+        </div>
+        <div class="features">
+          <div class="feature">
+            <strong>Automated Infra</strong>
+            <p style="color:var(--muted);margin-top:8px">Modular Terraform, blue/green and canary deployments.</p>
           </div>
-          <div class="card tilt" data-tilt>
-            <h3>Infrastructure</h3>
-            <div class="meta">Terraform, CloudFormation, Pulumi</div>
+          <div class="feature">
+            <strong>Platform Ops</strong>
+            <p style="color:var(--muted);margin-top:8px">Managed K8s, service mesh, multi-cluster strategy.</p>
           </div>
-          <div class="card tilt" data-tilt>
-            <h3>Containers</h3>
-            <div class="meta">Docker, Kubernetes, Helm</div>
+          <div class="feature">
+            <strong>Observability</strong>
+            <p style="color:var(--muted);margin-top:8px">Metrics, logging, tracing and SLO-based alerts.</p>
           </div>
         </div>
+      </div>
 
-      </section>
+      <aside id="stage" class="reveal" aria-hidden="true"></aside>
+    </section>
 
-      <aside id="scene-wrap" aria-hidden="true"></aside>
-    </main>
-
-    <section id="projects" class="reveal">
-      <h3 style="margin-top:28px">Projects & demos</h3>
+    <section id="projects" class="projects reveal">
+      <h3 style="margin-top:28px">Featured Projects</h3>
       <div class="grid">
-        <article class="card tilt" data-tilt>
-          <h3>Autoscale Infra</h3>
-          <p class="meta">Terraform + AWS + Spot fleets — automated scale & testing</p>
-        </article>
-        <article class="card tilt" data-tilt>
-          <h3>GitOps Platform</h3>
-          <p class="meta">ArgoCD + Flux for multi-cluster delivery</p>
-        </article>
-        <article class="card tilt" data-tilt>
-          <h3>Observability Stack</h3>
-          <p class="meta">Prometheus, Loki, Grafana dashboards with alerts</p>
-        </article>
+        <div class="card" data-info='{"title":"AutoScale Infra","desc":"Terraform modules with dynamic scaling & chaos tests"}'>
+          <div class="accent"></div>
+          <h4>AutoScale Infra</h4>
+          <p>Terraform • AWS • CICD</p>
+        </div>
+        <div class="card" data-info='{"title":"GitOps Platform","desc":"ArgoCD multi-cluster GitOps platform"}'>
+          <div class="accent"></div>
+          <h4>GitOps Platform</h4>
+          <p>ArgoCD • Helm • Git</p>
+        </div>
+        <div class="card" data-info='{"title":"Observability Stack","desc":"Prometheus+Grafana+Loki observability with alerts"}'>
+          <div class="accent"></div>
+          <h4>Observability Stack</h4>
+          <p>Prometheus • Grafana • Loki</p>
+        </div>
+        <div class="card" data-info='{"title":"K8s Cost Optimizer","desc":"Spot instance strategies and HPA tuning"}'>
+          <div class="accent"></div>
+          <h4>K8s Cost Optimizer</h4>
+          <p>Kubernetes • Cost</p>
+        </div>
+        <div class="card" data-info='{"title":"CI Templates","desc":"Reusable CI templates for GitHub Actions"}'>
+          <div class="accent"></div>
+          <h4>CI Templates</h4>
+          <p>GitHub Actions • CI</p>
+        </div>
+        <div class="card" data-info='{"title":"Infra Tests","desc":"Automated tests for infrastructure using Terratest"}'>
+          <div class="accent"></div>
+          <h4>Infra Tests</h4>
+          <p>Testing • Terratest</p>
+        </div>
       </div>
     </section>
 
-    <section class="timeline reveal">
-      <h3>Experience timeline</h3>
-      <div class="event">
-        <div class="dot"></div>
-        <div>
-          <h4>Senior DevOps Engineer — AcmeCloud</h4>
-          <p class="muted">2023 — Present • Designed multi-region infra, reduced costs 31%</p>
-        </div>
-      </div>
-      <div class="event">
-        <div class="dot"></div>
-        <div>
-          <h4>Platform Engineer — InfraCo</h4>
-          <p class="muted">2020 — 2023 • Built CI/CD platform for 60+ microservices</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="reveal" style="margin-top:20px;display:grid;grid-template-columns:1fr 360px;gap:18px;align-items:start">
+    <section id="skills" class="two-col reveal">
       <div>
-        <h3>Live terminal</h3>
-        <div class="terminal" id="terminal">$ npm run deploy
-Initializing...<br/></div>
+        <h3>Skills & Tools</h3>
+        <div style="display:grid;gap:12px;margin-top:8px">
+          <div class="panel">
+            <strong>Terraform</strong>
+            <div style="height:10px;background:rgba(255,255,255,0.03);border-radius:999px;margin-top:8px;overflow:hidden"><i data-p="92" style="display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accentA),var(--accentB));"></i></div>
+            <div style="height:8px"></div>
+            <strong>Kubernetes</strong>
+            <div style="height:10px;background:rgba(255,255,255,0.03);border-radius:999px;margin-top:8px;overflow:hidden"><i data-p="88" style="display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accentB),var(--accentC));"></i></div>
+            <div style="height:8px"></div>
+            <strong>CI/CD</strong>
+            <div style="height:10px;background:rgba(255,255,255,0.03);border-radius:999px;margin-top:8px;overflow:hidden"><i data-p="90" style="display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accentA),var(--accentC));"></i></div>
+          </div>
+          <div class="panel" style="display:flex;gap:12px;align-items:center;justify-content:space-between">
+            <div>
+              <h4 style="margin:0">Open Source</h4>
+              <p style="color:var(--muted);margin-top:6px">Contributor to infra templates and reusable CI libs.</p>
+            </div>
+            <div>
+              <button class="btn">View GitHub</button>
+            </div>
+          </div>
+        </div>
       </div>
+
       <aside>
-        <h3>Contact</h3>
-        <form onsubmit="event.preventDefault();alert('Thanks — message sent (demo)')">
-          <input type="text" placeholder="Name" required />
-          <input type="email" placeholder="Email" required />
-          <button class="btn" type="submit">Send</button>
-        </form>
+        <div class="panel">
+          <h4>Experience</h4>
+          <div style="color:var(--muted);margin-top:8px">Senior DevOps Engineer — 2023—Present<br/>Platform Engineer — 2020—2023</div>
+        </div>
+        <div style="height:12px"></div>
+        <div class="panel">
+          <h4>Contact</h4>
+          <div style="color:var(--muted);margin-top:8px">hello@yourdomain.com<br/>Bangalore, India</div>
+        </div>
       </aside>
     </section>
 
-    <footer>
-      <div class="muted">© 2025 Chaitanya — DevOps & Cloud</div>
-      <div class="muted">Built with HTML, CSS, JS • 3D hero</div>
-    </footer>
+    <section id="contact" class="reveal">
+      <h3 style="margin-top:22px">Get in touch</h3>
+      <div class="contact" style="display:grid;grid-template-columns:1fr 320px;gap:12px">
+        <div>
+          <input id="name" placeholder="Your name" />
+          <div style="height:8px"></div>
+          <input id="email" placeholder="Email" />
+          <div style="height:8px"></div>
+          <textarea id="msg" placeholder="Tell me about the project"></textarea>
+          <div style="height:8px"></div>
+          <button class="btn" onclick="sendMessage()">Send message</button>
+        </div>
+        <aside class="panel">
+          <h4>Availability</h4>
+          <p style="color:var(--muted);margin-top:8px">Open to contract and full-time roles. Available from Jan 2026 for new engagements.</p>
+          <div style="height:6px"></div>
+          <button class="btn ghost" onclick="window.open('#')">Download CV</button>
+        </aside>
+      </div>
+    </section>
+
+    <footer>© 2025 Chaitanya S • Built with Three.js & GSAP</footer>
   </div>
 
+  <!-- floating cursor + glow -->
+  <div class="cursor" id="cursor"></div>
+  <div class="glow" id="glow" style="background:radial-gradient(circle,#7b61ff66,#00f5a022,transparent)"></div>
+
+  <!-- Modal template (hidden) -->
+  <div id="modalRoot" style="display:none"></div>
+
   <script>
-    // Theme toggle with persistence
-    const themeToggle = document.getElementById('themeToggle');
-    themeToggle.addEventListener('click', ()=>{
-      const current = document.documentElement.getAttribute('data-theme');
-      if(current === 'light'){
-        document.documentElement.removeAttribute('data-theme');
-        localStorage.removeItem('pref-theme');
-      } else {
-        document.documentElement.setAttribute('data-theme','light');
-        localStorage.setItem('pref-theme','light');
-      }
-    });
-    if(localStorage.getItem('pref-theme')==='light'){document.documentElement.setAttribute('data-theme','light')}
+    // ------- small UX polish: cursor + glow -------
+    const cursor = document.getElementById('cursor'); const glow = document.getElementById('glow');
+    window.addEventListener('mousemove',(e)=>{cursor.style.left = e.clientX+'px'; cursor.style.top = e.clientY+'px'; glow.style.left = e.clientX+'px'; glow.style.top = e.clientY+'px';});
 
-    // Reveal on scroll
-    const reveals = document.querySelectorAll('.reveal');
-    const io = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('active'); });
-    },{threshold:0.12});
-    reveals.forEach(r=>io.observe(r));
-
-    // Tilt effect for cards (simple 3D tilt)
-    const tilts = document.querySelectorAll('[data-tilt]');
-    tilts.forEach(el=>{
-      el.addEventListener('mousemove', (e)=>{
-        const rect = el.getBoundingClientRect();
-        const x = (e.clientX - rect.left) / rect.width - 0.5;
-        const y = (e.clientY - rect.top) / rect.height - 0.5;
-        const rx = y * -10; const ry = x * 14;
-        el.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg) translateZ(8px)`;
+    // reveal animations on load
+    window.addEventListener('load', ()=>{
+      document.querySelectorAll('.reveal').forEach((el,i)=>setTimeout(()=>el.classList.add('show'),120*i));
+      // animate progress bars
+      document.querySelectorAll('[data-p]').forEach((el,idx)=>{
+        const to = +el.getAttribute('data-p'); gsap.to(el,{width:to+'%',duration:1.2,delay:0.2*idx,ease:'power2.out'});
       });
-      el.addEventListener('mouseleave', ()=> el.style.transform = 'translateZ(0)');
     });
 
-    // Terminal demo typing
-    const terminal = document.getElementById('terminal');
-    const lines = [
-      '$ git clone git@github.com:yourname/infra.git',
-      '$ cd infra && terraform apply',
-      '$ kubectl rollout status deployment/web',
-      '$ echo "deploy complete"'
-    ];
-    let idx=0; function typeLine(){
-      if(idx>=lines.length) return;
-      let i=0; const line=lines[idx]+'\n';
-      const t = setInterval(()=>{
-        terminal.innerHTML += line[i]; i++; terminal.scrollTop = terminal.scrollHeight;
-        if(i>=line.length){ clearInterval(t); idx++; setTimeout(typeLine,600); }
-      },24);
-    }
-    setTimeout(typeLine,900);
+    // projects modal quick preview
+    document.querySelectorAll('.card').forEach(card=>{
+      card.addEventListener('click', ()=>{
+        const info = JSON.parse(card.getAttribute('data-info'));
+        const m = document.createElement('div'); m.style.position='fixed'; m.style.inset='0'; m.style.background='rgba(2,6,23,0.7)'; m.style.display='flex'; m.style.alignItems='center'; m.style.justifyContent='center'; m.style.zIndex=9999;
+        m.innerHTML = `<div style=\"width:860px;max-width:95%;border-radius:12px;padding:18px;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);border:1px solid rgba(255,255,255,0.04);\"><h2>${info.title}</h2><p style='color:${'var(--muted)'}'>${info.desc}</p><div style='margin-top:12px;display:flex;gap:8px'><button class='btn' id='closeModal'>Close</button><button class='btn ghost' onclick=\"alert('Open demo/repo (demo)')\">Open demo</button></div></div>`;
+        document.body.appendChild(m);
+        m.querySelector('#closeModal').addEventListener('click',()=>{m.remove()});
+      });
+    });
 
-    // three.js 3D hero (rotating low-poly torus + subtle hover parallax)
+    // CTA scroll
+    document.getElementById('ctaProjects').addEventListener('click', ()=>document.getElementById('projects').scrollIntoView({behavior:'smooth'}));
+
+    // dummy contact
+    function sendMessage(){const n=document.getElementById('name').value||'Friend'; const e=document.getElementById('email').value||'you@you.com'; alert(`Thanks ${n}! I'll reach out to ${e} — demo`)}
+
+    // ----------------- Three.js immersive scene -----------------
     (function(){
-      const wrap = document.getElementById('scene-wrap');
+      const wrap = document.getElementById('stage');
+      if(!wrap) return; if(!window.WebGLRenderingContext){wrap.innerHTML='<div style="padding:20px;color:var(--muted)">3D not supported in this browser.</div>';return}
+
       const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(40, wrap.clientWidth / wrap.clientHeight, 0.1, 100);
-      camera.position.z = 4;
-      const renderer = new THREE.WebGLRenderer({alpha:true,antialias:true});
-      renderer.setSize(wrap.clientWidth, wrap.clientHeight);
-      renderer.setPixelRatio(window.devicePixelRatio);
+      const camera = new THREE.PerspectiveCamera(45, wrap.clientWidth/wrap.clientHeight, 0.1, 1000);
+      camera.position.set(0,0,6);
+      const renderer = new THREE.WebGLRenderer({antialias:true,alpha:true}); renderer.setPixelRatio(window.devicePixelRatio); renderer.setSize(wrap.clientWidth, wrap.clientHeight); renderer.outputEncoding = THREE.sRGBEncoding;
       wrap.appendChild(renderer.domElement);
 
-      const light = new THREE.PointLight(0xffffff,1.1);
-      light.position.set(5,5,5); scene.add(light);
-      const light2 = new THREE.AmbientLight(0x404050,0.6); scene.add(light2);
+      // HDR-like lights
+      const light = new THREE.DirectionalLight(0xffffff,1.1); light.position.set(5,5,5); scene.add(light);
+      scene.add(new THREE.AmbientLight(0xffffff,0.25));
 
-      // geometry + material
-      const geom = new THREE.TorusKnotGeometry(0.9,0.28,160,20,2,3);
-      const mat = new THREE.MeshStandardMaterial({metalness:0.7, roughness:0.2, envMapIntensity:1, color:0x7c5cff});
-      const mesh = new THREE.Mesh(geom, mat); scene.add(mesh);
+      // organic blob - icosahedron + noise vertex displacement
+      const geom = new THREE.IcosahedronGeometry(1.6, 5);
+      const mat = new THREE.MeshStandardMaterial({color:0x7b61ff,metalness:0.45,roughness:0.18,emissive:0x0a0520,clearcoat:0.2});
+      const blob = new THREE.Mesh(geom, mat); scene.add(blob);
 
-      // wireframe clone for depth
-      const geo2 = geom.clone();
-      const mat2 = new THREE.LineBasicMaterial({color:0xffffff,opacity:0.06,transparent:true});
-      const wire = new THREE.LineSegments(new THREE.WireframeGeometry(geo2), mat2); scene.add(wire);
+      // subtle wireframe overlay
+      const wf = new THREE.LineSegments(new THREE.WireframeGeometry(geom), new THREE.LineBasicMaterial({color:0xffffff,transparent:true,opacity:0.04})); scene.add(wf);
 
-      // resize handling
-      window.addEventListener('resize', ()=>{
-        renderer.setSize(wrap.clientWidth, wrap.clientHeight);
-        camera.aspect = wrap.clientWidth / wrap.clientHeight; camera.updateProjectionMatrix();
-      });
+      // particle halo
+      const count = 300; const pos = new Float32Array(count*3);
+      for(let i=0;i<count;i++){const r=2.2+Math.random()*1.6; const theta=Math.random()*Math.PI*2; const phi=Math.acos(2*Math.random()-1); pos[i*3]=Math.sin(phi)*Math.cos(theta)*r; pos[i*3+1]=Math.sin(phi)*Math.sin(theta)*r; pos[i*3+2]=Math.cos(phi)*r}
+      const pgeo = new THREE.BufferGeometry(); pgeo.setAttribute('position', new THREE.BufferAttribute(pos,3));
+      const pmat = new THREE.PointsMaterial({size:0.02,color:0x00f5a0,transparent:true,opacity:0.85});
+      const points = new THREE.Points(pgeo, pmat); scene.add(points);
 
-      // pointer parallax
-      let targetX=0, targetY=0;
-      window.addEventListener('mousemove',(e)=>{
-        const rect = wrap.getBoundingClientRect();
-        const x = (e.clientX - rect.left)/rect.width -0.5; const y=(e.clientY-rect.top)/rect.height-0.5;
-        targetX = x * 0.6; targetY = y * 0.6;
-      });
+      // animate vertex noise
+      const basePositions = geom.attributes.position.array.slice();
+      function noise(t){return (Math.sin(t)+Math.cos(t*1.3))*0.5}
 
-      // animate
-      function animate(){
-        requestAnimationFrame(animate);
-        mesh.rotation.x += 0.005; mesh.rotation.y += 0.006;
-        wire.rotation.x = mesh.rotation.x * 1.01; wire.rotation.y = mesh.rotation.y * 1.02;
+      // pointer parallax control
+      let rx=0, ry=0; wrap.addEventListener('mousemove',(e)=>{const r=wrap.getBoundingClientRect();ry=(e.clientX-r.left)/r.width-0.5; rx=(e.clientY-r.top)/r.height-0.5});
+
+      // resize
+      window.addEventListener('resize', ()=>{renderer.setSize(wrap.clientWidth, wrap.clientHeight); camera.aspect = wrap.clientWidth/wrap.clientHeight; camera.updateProjectionMatrix();});
+
+      // render loop
+      let t=0; function animate(){requestAnimationFrame(animate); t+=0.008;
+        // deform blob
+        const positions = geom.attributes.position.array;
+        for(let i=0;i<positions.length;i+=3){const vx = basePositions[i], vy = basePositions[i+1], vz = basePositions[i+2]; const d = 1 + 0.12*noise((vx+vy+vz)*2 + t*3); positions[i] = vx * d; positions[i+1] = vy * d; positions[i+2] = vz * d}
+        geom.attributes.position.needsUpdate = true; geom.computeVertexNormals();
+
+        blob.rotation.y += 0.004; blob.rotation.x += 0.0012;
+        wf.rotation.copy(blob.rotation);
         // parallax
-        mesh.position.x += (targetX - mesh.position.x) * 0.05;
-        mesh.position.y += (-targetY - mesh.position.y) * 0.05;
-        renderer.render(scene, camera);
+        blob.position.x += (ry*0.6 - blob.position.x) * 0.06; blob.position.y += (-rx*0.45 - blob.position.y) * 0.06;
+        points.rotation.y += -0.0012;
+        renderer.render(scene,camera);
       }
       animate();
     })();
-
-    // small progressive enhancement: if WebGL unsupported, show fallback
-    if(!window.WebGLRenderingContext){
-      const wrap = document.getElementById('scene-wrap');
-      wrap.innerHTML = '<div style="padding:20px;color:var(--muted)">3D preview unavailable — your browser does not support WebGL.</div>';
-    }
   </script>
 </body>
 </html>

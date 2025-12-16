@@ -1,607 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Chaitanya- Let's Code & Deploy</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
-    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
-	<link rel="icon" href="images/browser.png" type="image/x-icon">
+<head>
+  <title>Chaitanya | DevOps Engineer</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
-    <link rel="stylesheet" href="css/animate.css">
-    
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
-    <link rel="stylesheet" href="css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="css/magnific-popup.css">
+  <meta name="description" content="DevOps Engineer portfolio – AWS, Terraform, CI/CD, Cloud Infrastructure">
+  <meta name="author" content="Chaitanya S K S">
 
-    <link rel="stylesheet" href="css/aos.css">
+  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+  <link rel="icon" href="images/browser.png">
 
-    <link rel="stylesheet" href="css/ionicons.min.css">
-    
-    <link rel="stylesheet" href="css/flaticon.css">
-    <link rel="stylesheet" href="css/icomoon.css">
-    <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+  <link rel="stylesheet" href="css/animate.css">
+  <link rel="stylesheet" href="css/owl.carousel.min.css">
+  <link rel="stylesheet" href="css/aos.css">
+  <link rel="stylesheet" href="css/style.css">
 
-
-1
-<style>
-
-/*======================================
-//--//-->   ABOUT
-======================================*/
-
-.about-mf .box-shadow-full {
-  padding-top: 4rem;
-  padding-bottom: 4rem;
-}
-
-.about-mf .about-img {
-  margin-bottom: 2rem;
-}
-
-.about-mf .about-img img {
-  margin-left: 10px;
-}
-
-
-.skill-mf .progress {
-  /* background-color: #cde1f8; */
-  margin: .5rem 0 1.2rem 0;
-  border-radius: 0;
-  height: .7rem;
-}
-
-/* .skill-mf .progress{
-  height: .7rem;
-  background-color: #ffbd39;
-} */
-
-.progress-bar {
-            background-color: #ffbd39;
-			height: .7rem;
-            width: 0;
-            transition: width 5s ease;
-            }
-
-
-/* Animation styles */
-#typing-animation {
-  position: relative;
-  font-size: 30px;
-  font-weight: bold;
-  color: rgb(255, 255, 255);
-  overflow: hidden;
-  white-space: nowrap;
-  animation: typing 3s steps(20, end) infinite;
-}
-
-#typing-animation:before {
-  content: "";
-  /* position: absolute; */
-  top: 0;
-  left: 0;
-  width: 0;
-  height: 100%;
-  background-color: #ccc;
-  animation: typing-cursor 0.5s ease-in-out infinite;
-}
-
-@keyframes typing {
-  from {
-    width: 0;
-  }
-  to {
-    width: 100%;
-  }
-}
-
-@keyframes typing-cursor {
-  from {
-    width: 5px;
-  }
-  to {
-    width: 0;
-  }
-}
-
-
-/* project image zoom effect */
-
-.zoom-effect {
-  overflow: hidden;
-  transition: transform 0.3s ease-out;
-}
-
-.zoom-effect:hover {
-  transform: scale(1.1);
-}
-
-
-</style>
-
-
-      <meta name="description" content="DevOps Portfolio — projects, skills, and contact.">
-    <link rel="stylesheet" href="css/optimized.css">
+  <style>
+    .progress-bar {
+      background-color: #ffbd39;
+      height: 0.7rem;
+      width: 0;
+      transition: width 2s ease;
+    }
+    .zoom-effect:hover {
+      transform: scale(1.05);
+    }
+  </style>
 </head>
-  <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
-	  
-	  
-    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light site-navbar-target" id="ftco-navbar">
-	    <div class="container">
-	      <a class="navbar-brand" href="index.html"> Chaitanya </a>
-	      <button class="navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-	        <span class="oi oi-menu"></span> Menu
-	      </button>
 
-	      <div class="collapse navbar-collapse" id="ftco-nav">
-	        <ul class="navbar-nav nav ml-auto">
-	          <li class="nav-item"><a href="#home-section" class="nav-link"><span>Home</span></a></li>
-	          <li class="nav-item"><a href="#about-section" class="nav-link"><span>About</span></a></li>
-	          <li class="nav-item"><a href="#resume-section" class="nav-link"><span>Resume</span></a></li>
-	          <li class="nav-item"><a href="#project-section" class="nav-link"><span>Projects</span></a></li>
-	          <li class="nav-item"><a href="#contact-section" class="nav-link"><span>Contact</span></a></li>
-		  <li class="nav-item"><a href="https://chaitanyasks.github.io/" target="_blank" class="nav-link"><span>Blog</span></a></li>
-	        </ul>
-	      </div>
-	    </div>
-	  </nav>
-	  <section id="home-section" class="hero">
-		  <div class="home-slider  owl-carousel">
-	       <div class="slider-item ">
-	      	<div class="overlay"></div>
-	         <div class="container">
-	          <div class="row d-md-flex no-gutters slider-text align-items-end justify-content-end" data-scrollax-parent="true">
-	          	<div class="one-third js-fullheight order-md-last img" style="background-image:url(images/bg_1.png);">
-	          	 <div class="overlay"></div>
-	          	</div>
-		          <div class="one-forth d-flex  align-items-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-		          	<div class="text">
-		          		<span class="subheading">Hello!</span>
-			            <h1 class="mb-4 mt-3">I'm <span>Chaitanya </span></h1>
+<body data-spy="scroll" data-target=".site-navbar-target">
 
-						<!-- Element to contain animated typing -->
-						<span id="typing-animation"></span>
+<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar site-navbar-target">
+  <div class="container">
+    <a class="navbar-brand" href="#">Chaitanya</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav">
+      <span class="oi oi-menu"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="ftco-nav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
+        <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+        <li class="nav-item"><a href="#resume" class="nav-link">Resume</a></li>
+        <li class="nav-item"><a href="#projects" class="nav-link">Projects</a></li>
+        <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
 
-						<script defer>
-
-						// Initialize the typing animation
-						const typingAnimationElement = document.getElementById('typing-animation');
-
-						// Create an array of typing text
-						const typingTexts = [
-						'Lets Code & Deploy ',
-						'on Production '  ,
-						'with security ',
-						];
-
-						// Create a function to display the typing animation for a given text
-						function playTypingAnimation(text) {
-						// Loop through each character and add it to the element
-						for (let i = 0; i < text.length; i++) {
-							setTimeout(() => {
-							typingAnimationElement.textContent += text[i];
-							}, i * 200); // Increase the delay to slow down the typing animation
-						}
-
-						// Once the animation is complete, reset the text and start over
-						setTimeout(() => {
-							typingAnimationElement.textContent = '';
-							playTypingAnimation(typingTexts[(typingTexts.indexOf(text) + 1) % typingTexts.length]);
-						}, text.length * 200);
-						}
-
-						// Start the typing animation loop
-						playTypingAnimation(typingTexts[0]);
-
-						</script>
-
-						<br>
-						<br>
-			            <h2> DevOps & Platform Engineer </h2>
-						
-			            <p><a href="https://www.youtube.com/@AmanOps" target="_blank" class="btn btn-primary py-3 px-4">YouTube</a> 
-							<a href="https://github.com/amanpatelit" target="_blank" class="btn btn-white btn-outline-white py-3 px-4">Github</a></p>
-		            </div>
-		          </div>
-	        	</div>
-	        </div>
-	      </div>
-		</div>
-    </section>
-
-   <section class="ftco-about img ftco-section ftco-no-pb" id="about-section">
-    	<div class="container">
-			<div class="row">
-				<div class="row d-flex align-items-stretch">
-				<!-- <div class="row d-flex"> -->
-					<div class="col-md-6 col-lg-5 d-flex">
-						<div class="img-about img d-flex align-items-stretch">
-							<div class="overlay">
-								<div class="row">
-									<div class="col-sm-6 col-md-5">
-									  <div class="about-img">
-										<img decoding="async" loading="lazy" src="images/about-me.png" class="img-fluid rounded b-shadow-a" alt="">
-									  </div>
-									</div>
-									<!-- Details next to profile image -->
-									<div class="col-sm-6 col-md-7">
-									  <div class="about-info">
-										<p><span class="title-s">Name: </span> <span> Chaitanya </span></p>
-										<p><span class="title-s">Job Role: </span> <span> Sr.DevOps & Platform Engineer </span></p>
-										<p><span class="title-s">Experience: </span> <span> 5+ years </span></p>
-										<p><span class="title-s">Address: </span> <span> Noida, India </span></p>
-									  </div>
-									</div>
-								  </div>
-								  
-								<div class="skill-mf" id="skill-mf">
-									<p class="title-s">Skills</p>
-									<span>Networking</span> <span class="pull-right">90%</span>
-									<div class="progress">
-										<div class="progress-bar" id="Networking" role="progressbar" aria-valuenow="85" aria-valuemin="0"
-											aria-valuemax="100"></div>
-									</div>
-									<script defer>
-										var progressBar = document.getElementById("Networking");
-
-										
-									window.addEventListener("scroll", () => {
-										const rect = progressBar.getBoundingClientRect();
-										const isInViewport = (rect.top >= 0 && rect.bottom <= window.innerHeight);
-										if (isInViewport) {
-											// Your function to be called when the element is visible
-											updateProgress();
-											// Optionally, remove the event listener to avoid redundancy
-											window.removeEventListener("scroll", this);
-										}
-									});
-										function updateProgress() {        
-										var Networking = document.getElementById("Networking");
-										var CloudOps = document.getElementById("CloudOps");
-										var Visualization = document.getElementById("Visualization");
-										var DevSecOps = document.getElementById("DevSecOps");
-										var Machine = document.getElementById("Machine");
-
-										Networking.style.width = 90 + "%";
-										CloudOps.style.width = 85 + "%";
-										Visualization.style.width = 90 + "%";
-										DevSecOps.style.width = 90 + "%";
-										Machine.style.width = 80 + "%";
-										}
-									</script>
-									<span>CloudOps</span> <span class="pull-right">85%</span>
-									<div class="progress">
-										<div class="progress-bar" id="CloudOps" role="progressbar" aria-valuenow="85" aria-valuemin="0"
-											aria-valuemax="100"></div>
-									</div>
-									
-									<span>Visualization</span> <span class="pull-right">90%</span>
-									<div class="progress">
-										<div class="progress-bar" role="progressbar" id="Visualization" aria-valuenow="90" aria-valuemin="0"
-											aria-valuemax="100"></div>
-									</div>
-									
-									<span>DevSecOps</span> <span class="pull-right">90%</span>
-									<div class="progress">
-										<div class="progress-bar" role="progressbar" id="DevSecOps" aria-valuenow="85" aria-valuemin="0"
-											aria-valuemax="100"></div>
-									</div>
-									
-									<span>Machine Learning</span> <span class="pull-right">80%</span>
-									<div class="progress">
-										<div class="progress-bar" role="progressbar" id="Machine" aria-valuenow="80" aria-valuemin="0"
-											aria-valuemax="100"></div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					
-					<div class="col-md-6 col-lg-7 pl-lg-5 pb-5">
-						<div class="row justify-content-start pb-3">
-							<div class="col-md-12 heading-section ftco-animate">
-								
-								<h1 class="big">About</h1>
-								<h2 class="mb-4">About Me</h2>
-								
-								<p>
-									I specialize in architecting, automating, and securing cloud infrastructure across multiple platforms, ensuring high performance, scalability, and resilience. With deep expertise in CI/CD pipelines, system administration, and real-time monitoring, I drive operational excellence through automation and innovative cloud solutions. My passion lies in building secure, efficient, and scalable ecosystems that empower businesses to accelerate their digital transformation with confidence.</p>
-								<ul class="about-info mt-4 px-md-0 px-2">
-									<li class="d-flex"><span>Profile:</span> <span>Multi Cloud DevOps Engineer</span></li>
-									<li class="d-flex"><span>Domain:</span> <span>Open Source Techonogies, Multi Clouds DevOps, GitOps</span></li>
-									<li class="d-flex"><span>Education:</span> <span>Bsc in IT </span></li>
-									<li class="d-flex"><span>Language:</span> <span>English, Hindi</span></li>
-									<li class="d-flex"><span>Interest:</span> <span> Open Source Technologies, Travel Photography, Teaching</span></li>
-									
-								</ul>
-							</div>
-						</div>
-
-
-						<div class="counter-wrap ftco-animate d-flex mt-md-3">
-							<div class="text">
-								<p class="mb-4">
-									<span class="number" data-number="12">0</span> <span>+</span>
-									<span>&nbsp; Projects completed</span>
-								</p>
-								<p><a href="https://www.linkedin.com/in/amanpatelofficial/" target="_blank" class="btn btn-primary py-3 px-3">LinkedIn</a></p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-    </section>
-
-
-
-	
-    <section class="ftco-section ftco-no-pb" id="resume-section">
-    	<div class="container">
-    		<div class="row justify-content-center pb-5">
-          <div class="col-md-10 heading-section text-center ftco-animate">
-          	<h1 class="big big-2">Resume</h1>
-            <h2 class="mb-4">Resume</h2>
-            <p>Seasoned Clouds & DevSecOps with 5+ years of experience driving business strategies through the Clouds & DevSecOps. Proven expertise in Cloud Infra , statistical analysis, machine learning algorithms and project management.</p>
-          </div>
-        </div>
-
-		<div class="row">
-			<h1 class="big-4">Experience</h1>
-			<div class="underline"></div>
-		</div>
-		<br>
-		
-		<div class="row">
-			<div class="col-md-6">
-				<div class="resume-wrap ftco-animate">
-					<span class="date">2021-2022</span>
-					<h2> DevOps Admin</h2>
-					<span class="position">IP Sloutions Technologies</span>
-					<p class="mt-4"> DevOps Admin 
-						<ul>
-							<li>Migrated the RHEL Server form RHEL & to RHEL 8</li>
-							<li>Setup the Jenkins CI/CD for Production micro-servies</li>
-							<li>Reduce the size of docker image more then 80% for all the micro-servives running on production.</li>
-							<li>implemented the sonar for the scanning & improving the code quality.</li>
-						</ul>
-					</p>
-				</div>
-
-			</div>
-			<div class="col-md-6">
-				<div class="resume-wrap ftco-animate">
-					<span class="date">2022 - 2024</span>
-					<h2>DevOps Specialist</h2>
-					<span class="position">Opstree</span>
-					<p class="mt-4"> SRE- DevOps Engineer 
-						<ul>
-							<li>Designed and deployed EKS clusters to streamline operations and enhance application scalability.</li>
-							<li>As a dedicated DevOps Engineer and Platform Specialist, I specialize in building scalable, secure, and automated infrastructures that empower organizations to innovate with confidence. With expertise in cloud platforms like AWS and Google Cloud, I design and implement solutions that enhance performance and reliability.</li>
-							<li>Passionate about streamlining workflows, I leverage tools like Terraform, Kubernetes, and Helm to automate infrastructure deployment and management, ensuring seamless CI/CD pipelines and robust GitOps practices.</li>
-						</ul>
-					</p>
-				</div>
-
-			</div>
-			<div class="col-md-6">
-				<div class="resume-wrap ftco-animate">
-					<span class="date">2024-Till Date</span>
-					<h2>Software Engineer L2</h2>
-					<span class="position">Quokkalabs LLP</span>
-					<p class="mt-4"> DevOps Engineer & Platform Specialist @QL 
-						<ul>
-							<li>I bring a wealth of expertise in automating complex workflows, fortifying system security, and crafting resilient, scalable infrastructures that stand the test of time. With a passion for innovation, I specialize in streamlining deployments and delivering seamless, high-performance digital experiences that exceed expectations..</li>
-							<li>Empowering businesses with cutting-edge DevOps, DevSecOps, Platform Engineering, and GitOps solutions. I specialize in automating workflows, enhancing system security, and building resilient, scalable infrastructures. Passionate about driving innovation, streamlining deployments, and delivering seamless digital experiences. Let’s collaborate to transform ideas into impactful solutions!.</li>
-							<li>I am passionate about bridging the gap between operations and development, creating ecosystems where speed and reliability coexist. By continuously learning and adopting cutting-edge technologies, I aim to help organizations achieve operational excellence.
-
-							</li>
-						</ul>
-					</p>
-				</div>
-
-			</div>
-		</div>
-         
-		<br>
-		<br>
-
-		<div class="row">
-			<h1 class="big-4">Education</h1>
-			<div class="underline"></div>
-		</div>
-		<br>
-		
-		<div class="row">
-			<div class="col-md-6 col-sm-4">
-				<div class="resume-wrap ftco-animate">
-					<span class="date">2020–2022</span>
-					<h2>Bachelor of Science in Information Technologies </h2>
-					<span class="position">Kanpur University</span>
-					<p class="mt-4">Grade: First-Class Distinction</p>
-				</div>
-			</div>
-		
-			<div class="col-md-6 col-sm-4">
-				<div class="resume-wrap ftco-animate">
-					<span class="date">2018–2019</span>
-					<h2>Higher Secondary School</h2>
-					<span class="position">Lucknow Public Schools & Colleges</span>
-					<p class="mt-4">Grade: Second-Class Distinction</p>
-				</div>
-			</div>
-		</div>
-         <!--
-    		<div class="row justify-content-center mt-5">
-    			<div class="col-md-6 text-center ftco-animate">
-    				<p><a href="#" class="btn btn-primary py-4 px-5">Download CV</a></p>
-    		</div>
-    	</div>
-	-->	
-	
-    </section>
-
-   
-
-    <section class="ftco-section" id="project-section">
-      <div class="container">
-        <div class="row justify-content-center mb-5 pb-5">
-          <div class="col-md-7 heading-section text-center ftco-animate">
-            <h1 class="big big-2">Projects</h1>
-            <h2 class="mb-4">DevSecOps Workflow</h2>
-            <p>Below are the sample Clouds & DevSecOps projects on AWS with Security</p>
-          </div>
-        </div>
-        <div class="row d-flex">
-          <div class="col-md-4 d-flex ftco-animate">
-          	<div class="blog-entry justify-content-end">
-              <a href="https://chaitanyasks.github.io/" class="block-20 zoom-effect" style="background-image: url('images/proj_1.jpg');">
-              </a>
-              <div class="text mt-3 float-right d-block">
-
-                <h3 class="heading"><a href="https://github.com/amanpatelit">How to Crack AWS Solutions Architect Associate Exam</a></h3>
-                <p>AWS is crucial for businesses due to its market dominance, scalability, cost-effectiveness, global infrastructure, reliability, security, innovation, ecosystem, enabling digital transformation, enterprise adoption, and economic impact..</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 d-flex ftco-animate">
-          	<div class="blog-entry justify-content-end">
-              <a href="https://chaitanyasks.github.io/" class="block-20 zoom-effect" style="background-image: url('images/proj_2.jpg');">
-              </a>
-              <div class="text mt-3 float-right d-block">
-
-                <h3 class="heading"><a href="https://github.com/amanpatelit">DevSecOps is an approach that integrates security practices within the DevOps process to ensure secure software development and operations.</a></h3>
-                <p>DevSecOps, short for Development, Security, and Operations, is an approach that integrates security practices into every stage of the DevOps lifecycle to ensure secure software development and operations. It emphasizes te and best practices.</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 d-flex ftco-animate">
-          	<div class="blog-entry">
-              <a href="https://chaitanyasks.github.io/" class="block-20 zoom-effect" style="background-image: url('images/proj_3.jpg');">
-              </a>
-              <div class="text mt-3 float-right d-block">
-
-                <h3 class="heading"><a href="https://github.com/amanpatelit">How to Handle DevOps Outages Like a Pro.</a></h3>
-                <p>When an outage hits, the first rule is simple — stay calm and communicate clearly. Panic spreads faster than errors. Begin by acknowledging the issue and notifying relevant teams via established incident channels (Slack, PagerDuty). Immediately assign clear ownership — one lead engineer to coordinate, one to investigate logs/metrics, and one to communicate with stakeholders.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-	<br>
-		<!-- added justify-content-center to center align the last two projects -->
-    </section>
-
-	<section class="ftco-section ftco-no-pt ftco-no-pb ftco-counter img" id="section-counter">
-      <div class="container">
-		<div class="row d-md-flex align-items-center">
-          <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
-            <div class="block-18">
-              <div class="text">
-                <strong class="number" data-number="5">0</strong>
-                <span>Achievements</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
-            <div class="block-18">
-              <div class="text">
-                <strong class="number" data-number="12">0</strong>
-                <span>Projects</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
-            <div class="block-18">
-              <div class="text">
-                <strong class="number" data-number="25">0</strong>
-                <span>Mentored Students</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
-            <div class="block-18">
-              <div class="text">
-                <strong class="number" data-number="50">0</strong>
-                <span>Book a Coffee</span>
-              </div>
-            </div>
-          </div>
-        </div>
+<!-- HERO -->
+<section id="home" class="hero">
+  <div class="container">
+    <div class="row align-items-center" style="min-height:90vh">
+      <div class="col-md-7">
+        <span class="subheading">Hello</span>
+        <h1>I’m <span>Chaitanya S K S</span></h1>
+        <h2 class="mb-3">DevOps Engineer</h2>
+        <p id="typing"></p>
+        <p>
+          <a href="#contact" class="btn btn-primary">Hire Me</a>
+          <a href="https://github.com/chaitanyasks" target="_blank" class="btn btn-outline-light">GitHub</a>
+        </p>
       </div>
-	
-	  <div class="ftco-section ftco-hireme img margin-top" style="background-image: url(images/bg_1.jpg)">
-			<!-- <div class="container"> -->
-				<div class="row justify-content-center">
-					<div class="col-md-7 ftco-animate text-center">
-						<h2>More projects on<span> Github  </span> </h2>
-						<div class="heading"> <h4> I love to solve business problems & uncover hidden data stories </h4>
-						<br>
-						<p><a href="https://github.com/amanpatelit" class="btn btn-primary py-3 px-5">GitHub</a></p>
-						</div>
-					</div>
-				</div>
-			<!-- </div> -->
-		</div>
-	</section>
+    </div>
+  </div>
+</section>
 
-		  <div class="container">
-			<br>
-			<br>
-			<div class="row justify-content-center">
-				<div class="col-md-7 ftco-animate text-center">
-					<h2>Have a<span> Question?  </span> <a href="https://docs.google.com/forms/d/e/1FAIpQLSe55mlzuLhCs8_HXQLs0aPcQSKFEhLAHnrkHznZMasPIVOsBg/viewform?usp=sf_link" target="_blank" class="btn btn-primary py-3 px-5">Click Here</a> </h2>
-				</div>
-			</div>
-				<br>
-					<ul class="ftco-footer-social list-unstyled d-flex justify-content-center align-items-center mb-0">
-					  <li class="ftco-animate normal-txt">Find me on  </li>
-					  <li class="ftco-animate"><a href="https://www.youtube.com/@AmanOps"><span class="icon-youtube"></span></a></li>
-					  <li class="ftco-animate"><a href="https://www.linkedin.com/in/amanpatelofficial/"><span class="icon-linkedin"></span></a></li>  
-				      <li class="ftco-animate"><a href="https://www.instagram.com/amanpatel.it"><span class="icon-instagram"></span></a></li>
-					  <li class="ftco-animate"><a href="https://www.github.com/amanpatelit"><span class="icon-github"></span></a></li>
-					</ul>
-				<br>
-		   </div>
-   </div>
- </section>
+<script>
+const texts = ["AWS & Terraform", "CI/CD Automation", "Cloud Infrastructure"];
+let i = 0, j = 0;
+setInterval(() => {
+  document.getElementById("typing").innerText = texts[i].slice(0, j++);
+  if (j > texts[i].length) { j = 0; i = (i + 1) % texts.length; }
+}, 150);
+</script>
 
+<!-- ABOUT -->
+<section id="about" class="ftco-section">
+  <div class="container">
+    <h2 class="mb-4">About Me</h2>
+    <p>
+      DevOps Engineer with 2 years of hands-on experience in AWS cloud infrastructure,
+      Terraform automation, CI/CD pipelines, and containerized deployments.
+      Skilled in building secure, scalable, and production-ready systems.
+    </p>
 
- 
-	
-    <footer class="ftco-footer ftco-section">
-		<div class="container">
-		  <div class="row">
-			<div class="col-md-12 text-center">
-  
-			  <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-	Copyright &copy;<script defer>document.write(new Date().getFullYear());</script> All rights reserved | Let's Code & Deploy <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://amansdlc.com" target="_blank">amansdlc.com</a>
-	<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-			</div>
-		  </div>
-		</div>
+    <ul>
+      <li><strong>Role:</strong> DevOps Engineer</li>
+      <li><strong>Experience:</strong> 2 Years</li>
+      <li><strong>Location:</strong> Hyderabad, India</li>
+      <li><strong>Core Skills:</strong> AWS, Terraform, CI/CD, Docker, Linux</li>
+    </ul>
 
-	</footer>
+    <h4 class="mt-4">Skills</h4>
 
+    <span>AWS</span>
+    <div class="progress"><div class="progress-bar" style="width:90%"></div></div>
 
-  <!-- loader -->
-  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+    <span>Terraform</span>
+    <div class="progress"><div class="progress-bar" style="width:85%"></div></div>
 
+    <span>CI/CD (Jenkins, GitHub Actions)</span>
+    <div class="progress"><div class="progress-bar" style="width:80%"></div></div>
 
-  <script defer src="js/jquery.min.js"></script>
-  <script defer src="js/jquery-migrate-3.0.1.min.js"></script>
-  <script defer src="js/popper.min.js"></script>
-  <script defer src="js/bootstrap.min.js"></script>
-  <script defer src="js/jquery.easing.1.3.js"></script>
-  <script defer src="js/jquery.waypoints.min.js"></script>
-  <script defer src="js/jquery.stellar.min.js"></script>
-  <script defer src="js/owl.carousel.min.js"></script>
-  <script defer src="js/jquery.magnific-popup.min.js"></script>
-  <script defer src="js/aos.js"></script>
-  <script defer src="js/jquery.animateNumber.min.js"></script>
-  <script defer src="js/scrollax.min.js"></script>
-  
-  <script defer src="js/main.js"></script>
-    
-  </body>
+    <span>Docker</span>
+    <div class="progress"><div class="progress-bar" style="width:80%"></div></div>
+
+    <span>Linux</span>
+    <div class="progress"><div class="progress-bar" style="width:85%"></div></div>
+  </div>
+</section>
+
+<!-- RESUME -->
+<section id="resume" class="ftco-section">
+  <div class="container">
+    <h2 class="mb-4">Experience</h2>
+
+    <div class="resume-wrap">
+      <span class="date">2023 – Present</span>
+      <h3>DevOps Engineer</h3>
+      <span class="position">FugenWebTech Pvt Ltd</span>
+      <ul>
+        <li>Provisioned AWS infrastructure using Terraform (EC2, VPC, IAM, ALB).</li>
+        <li>Built and maintained CI/CD pipelines using Jenkins and GitHub Actions.</li>
+        <li>Dockerized applications and deployed on AWS EC2.</li>
+        <li>Implemented monitoring using Grafana, Prometheus, and CloudWatch.</li>
+        <li>Managed Linux servers and handled production incidents.</li>
+      </ul>
+    </div>
+
+    <h2 class="mt-5">Education</h2>
+    <p>Bachelor’s Degree – Information Technology</p>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="ftco-section">
+  <div class="container">
+    <h2 class="mb-4">Projects</h2>
+
+    <ul>
+      <li><strong>AWS Infrastructure Automation:</strong> Terraform-based provisioning of cloud resources.</li>
+      <li><strong>CI/CD Pipeline:</strong> Automated build & deployment using Jenkins.</li>
+      <li><strong>Monitoring Stack:</strong> Grafana + Prometheus + CloudWatch.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="ftco-section">
+  <div class="container">
+    <h2>Contact</h2>
+    <p>Email: your.email@example.com</p>
+    <p>GitHub: <a href="https://github.com/chaitanyasks" target="_blank">github.com/chaitanyasks</a></p>
+    <p>LinkedIn: your-linkedin-url</p>
+  </div>
+</section>
+
+<footer class="ftco-footer">
+  <div class="container text-center">
+    <p>&copy; <script>document.write(new Date().getFullYear())</script> Chaitanya S K S</p>
+  </div>
+</footer>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
+</body>
 </html>
